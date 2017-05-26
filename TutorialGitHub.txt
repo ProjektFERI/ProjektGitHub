@@ -1,0 +1,27 @@
+NAVODILA ZA NAMESTITEV IN UPORABO GitHub
+----------------------------------------------------
+NAMESTITEV:
+
+1) Iz strani https://desktop.github.com/ namesti GitHub Desktop.
+Preko te aplikacije boš lahko prejemal in nalagal popravke v projektu, ki je naložen.
+
+2) Ko imaš to aplikacijo naloženo idi na https://github.com/ProjektFERI/ProjektGitHub ter
+stisni Clone or download, ter nato open in Desktop. V alertu stisni open in Desktop.
+Za tem se bo odprla aplikacija ki te bo vprašala, kje naj da ta repozitorij. Ti si izbereš mapo,
+kjer boš shranjeval kodo za projekt. Najbolje da je to neka nova mapa da lahko testaš v svoji mapi,
+potem pa v to novo mapo daš samo delujočo kodo.
+
+----------------------------------------------------
+UPORABA:
+
+1)!!!!!Vedno stisni Fetch origin ko prideš v aplikacijo
+(to sproži postopek, ki ti ob spremembi na strežniku vedno da najnovejšo objavljeno kodo).
+Zdaj lahko v mapi za GitHub vidiš vse datoteke, ki so naložene tudi na spletu.
+
+2)Ko želiš kaj naložit samo skopiraš te datoteke v to mapo.
+Zatem v GitHub Desktop pod current repository Projekt,
+pod Changes vidiš kaj želiš spremenit, če je to ok spodaj pod Summary napišeš kaj je to in ob potrebi dodaš opis.
+Za tem stisneš Commit to master ter zgoraj Push origin.
+
+
+Sedaj znaš uporabljati GitHub :D
