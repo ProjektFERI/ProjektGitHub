@@ -1,0 +1,41 @@
+<h1>Html parser</h1>
+<button (click)="parse()">Parse</button>
+<br><br>
+<button (click)="parseTeams()">Parse teams</button>
+<button (click)="parsePlayers()">Parse players</button>
+<button (click)="parseEachPlayer()">Parse each player</button>
+
+<h2>Teams</h2>
+<ul>
+    <li *ngFor="let team of teams">
+        <button (click)="onSelect(team)">{{team.Name}}</button>
+    </li>
+</ul>
+
+<hr>
+
+<h3>Players</h3>
+<ul>
+    <li *ngFor="let player of players">
+        <button (click)="onSelectPlayer(player)">{{player.Name}}</button>
+    </li>
+</ul>
+
+<h4>Selected Player</h4>
+<h5>{{selectedPlayer.Name}}</h5>
+<ul>
+    <li>Club: {{selectedPlayer.Club}}</li>
+    <li>Value: {{selectedPlayer.Value}}</li>
+    <li>Skills: {{selectedPlayer.Skills}}</li>
+    <li>Crossing: {{selectedPlayer.Crossing}}</li>
+    <li>Finishing: {{selectedPlayer.Finishing}}</li>
+    <li>Heading: {{selectedPlayer.Heading}}</li>
+    <img src={{selectedPlayer.Photo}} />
+    <li>...</li>
+</ul>
+
+<ul>
+    <li *ngFor="let sql of sqls">
+        {{sql}}
+    </li>
+</ul>
