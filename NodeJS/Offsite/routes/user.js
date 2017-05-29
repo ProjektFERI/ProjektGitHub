@@ -76,7 +76,6 @@ router.post('/sign-up', function(request, response)
                 if(!error)
                     res = { StatusCode : 201, Status : "Sign-up successful" };
 
-                console.log(error);
                 response.json(res);
             });
         }
