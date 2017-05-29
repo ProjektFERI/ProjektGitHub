@@ -1,0 +1,25 @@
+.nav-tabs
+{
+    background-color: white;
+}
+.tab-content
+{
+    background-color:#303136;
+    color:#fff;
+    padding:5px
+}
+.nav-tabs > li > a:hover
+{
+    background-color: green;
+    color:#fff;
+}
+.nav-tabs > li > a, .nav-pills > li > a
+{
+    margin-left:5px;
+    margin-right:5px;
+}
+.nav-tabs > li.active > a
+{
+    background-color: hsl(118, 51%, 47%);
+    color: white;
+}

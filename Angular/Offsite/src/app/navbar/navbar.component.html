@@ -1,0 +1,19 @@
+<nav class="navbar navbar-default" style="font-family:Poppins; background-color:green;">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a routerLink="/" class="navbar-left"><img src="../../assets/logo.ico" style="width:50px;height:50px"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="navLink" routerLink="/">Home</a></li>
+                <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="navLink" routerLink="/fantasy">Fantasy</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="navLink" routerLink="/sign-up"><span class="glyphicon glyphicon-user"></span> Sign-up</a></li>
+                <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="navLink" routerLink="/login"><span class="glyphicon glyphicon-log-in"></span> Sign-in</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--    <li><a href="registracija.php"><span class="glyphicon glyphicon-user"></span> Registracija</a></li>
+    <li><a href="prijava.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li> -->
