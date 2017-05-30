@@ -43,6 +43,17 @@ export class AuthenticationService
                     });
     }
 
+    edit(user : User) : Observable<APIresponse>
+    {
+        return this.http.post('http://localhost:8080/user/edit', user, { headers: this.getHeaders(), withCredentials: true })
+                    .map((response : Response) =>
+                    {
+                        var res = response.json();
+                        console.log(res.Status);                                //TEST - zapis v konzoli
+                        return res;
+                    });
+    }
+
 
     private getHeaders()
     {

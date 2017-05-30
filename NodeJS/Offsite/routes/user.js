@@ -83,4 +83,41 @@ router.post('/sign-up', function(request, response)
 });
 
 
+//localhost:8080/user/edit
+router.post('/edit', function(request, response)
+{
+    console.log("--EDIT--");
+    var username    = request.session.user;                                                   //iz poslanega requesta poberemo username, geslo in email
+    var oldPass    = request.body.passwordO;
+    var newPass    = request.body.password;
+
+    var salt            = bcrypt.genSaltSync(10);
+    var passwordHash    = bcrypt.hashSync(password, salt);                                      //generiramo hash iz gesla v string obliki z salt = 10
+
+    var queryString = "SELECT username FROM user WHERE username = " + mysql.escape(username);
+    databaseConnection.query(queryString, function(error, result)
+    {
+        var res;
+
+        var equals = bcrypt.compareSync(oldPass, result[0].password);
+
+        if(equals)
+        {
+          queryString = "UPDATE uporabnik SET password = "+ newPass + "WHERE username = "+ username;
+          databaseConnection.query(queryString, function(error, result)
+          {
+              if(!error)
+                  res = { StatusCode : 201, Status : "Edit successful" };
+
+              response.json(res);
+          });
+        }
+        else
+            res = { StatusCode : 403, Status : "Wrong password", Token : null };
+
+        response.json(res);
+    });
+});
+
+
 module.exports = router;

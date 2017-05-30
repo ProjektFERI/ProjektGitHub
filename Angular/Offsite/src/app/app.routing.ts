@@ -8,12 +8,14 @@ import { HomeComponent }        from './home/home.component';
 import { FantasyComponent }     from './fantasy/fantasy.component';
 import { LoginComponent }       from './login/login.component';
 import { SignUpComponent }      from './sign-up/sign-up.component';
+import { EditComponent }        from './edit/edit.component';
 
 const appRoutes : Routes = [
     { path: '', component: HomeComponent },
     { path: 'fantasy', component: FantasyComponent },
     { path: 'login', component: LoginComponent },
     { path: 'sign-up', component: SignUpComponent },
+    { path: 'edit', component: EditComponent },
 
     /* SEM SE PRIDEJO DODATNE POTI + PREVERJANJE ALI JE POT LAHKO DOSTOPANA z AUTH GUARD */
 
