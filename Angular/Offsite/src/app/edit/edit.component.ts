@@ -25,17 +25,19 @@ export class EditComponent {
       this.user.password = '';
       this.user.email = '';
     }
-    
+
   //klik na gumb Edit, uporabi se AuthenticationService, klice se sprememba
   edit()
   {
       this.authenticationService.edit(this.user).subscribe(
           response =>
           {
+
               this.apiResponse = response;                                    //dobljen response od servera
 
-              if(this.apiResponse.StatusCode == 200)                          //ce je prijava uspela
+              if(this.apiResponse.StatusCode == 200)   {                       //ce je prijava uspela
                   this.router.navigate(['/']);                                //preusmeritev na domaco stran
+                }
               else
                   alert(this.apiResponse.Status);
           },
