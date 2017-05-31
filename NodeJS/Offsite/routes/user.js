@@ -106,8 +106,9 @@ router.post('/edit', function(request, response)
           queryString = "UPDATE user SET password = '"+ passwordHash + "' WHERE username = '"+ username + "'";
           databaseConnection.query(queryString, function(error, result)
           {
+              console.log("tu sem");
               if(!error){
-                res = { StatusCode : 200, Status : "Edit successful" };
+                res = { StatusCode : 201, Status : "Edit successful" };
                 console.log("ok je");
               }
               else{
@@ -116,7 +117,7 @@ router.post('/edit', function(request, response)
           });
         }
         else
-            res = { StatusCode : 403, Status : "Wrong password", Token : null };
+            res = { StatusCode : 403, Status : "Wrong password" };
 
         response.json(res);
     });

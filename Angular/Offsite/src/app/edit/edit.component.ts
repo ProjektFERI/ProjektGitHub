@@ -35,8 +35,9 @@ export class EditComponent {
 
               this.apiResponse = response;                                    //dobljen response od servera
 
-              if(this.apiResponse.StatusCode == 200)   {                       //ce je prijava uspela
-                  this.router.navigate(['/']);                                //preusmeritev na domaco stran
+              if(this.apiResponse.StatusCode == 201)   {                       //ce je prijava uspela
+                  this.router.navigate(['/']);
+                  console.log("doma");                           //preusmeritev na domaco stran
                 }
               else
                   alert(this.apiResponse.Status);
