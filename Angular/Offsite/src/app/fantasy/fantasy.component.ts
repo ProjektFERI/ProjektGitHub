@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   //selector: 'app-fantasy',
   templateUrl: './fantasy.component.html',
   styleUrls: ['./fantasy.component.css']
 })
-export class FantasyComponent implements OnInit {
-
+export class FantasyComponent
+{
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }

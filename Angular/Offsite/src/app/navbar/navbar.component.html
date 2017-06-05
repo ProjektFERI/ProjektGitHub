@@ -8,13 +8,13 @@
                 <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="navLink" routerLink="/">Home</a></li>
                 <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="navLink" routerLink="/fantasy">Fantasy</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="navLink" routerLink="/edit"><span class="glyphicon glyphicon-cog"></span> Edit</a></li>
+            <ul class="nav navbar-nav navbar-right" *ngIf="!loggedIn"> <!-- PRIKAZANO KO UPORABNIK NI PRIJAVLJEN -->
                 <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="navLink" routerLink="/sign-up"><span class="glyphicon glyphicon-user"></span> Sign-up</a></li>
                 <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="navLink" routerLink="/login"><span class="glyphicon glyphicon-log-in"></span> Sign-in</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" *ngIf="loggedIn"> <!-- PRIKAZANO KO JE UPORABNIK PRIJAVLJEN -->
+                <li style="cursor:pointer;"><a class="navLink" (click)="logout()"><span class="glyphicon glyphicon-log-out"></span> Sign-out</a></li>
             </ul>
         </div>
     </div>
 </nav>
-<!--    <li><a href="registracija.php"><span class="glyphicon glyphicon-user"></span> Registracija</a></li>
-    <li><a href="prijava.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li> -->

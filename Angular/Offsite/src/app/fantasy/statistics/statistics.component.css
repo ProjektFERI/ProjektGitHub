@@ -1,0 +1,40 @@
+.class-padd
+{
+    margin-bottom: 20px;
+    /*border: black 2px solid;*/
+    border-radius: 5px;
+    padding: 5px;
+    min-height: 100px;
+    background-color: #f3f1f1;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.02), 0 6px 20px 0 rgba(0, 0, 0, 0.02);
+}
+
+.class-padd-2
+{
+    padding: 10px;
+}
+
+.class-padd-modal
+{
+    /*border: black 2px solid;
+    border-radius: 5px;*/
+    padding: 5px;
+    min-height: 200px;
+    border-radius: 10px;
+    background-color: #f3f1f1;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.02), 0 6px 20px 0 rgba(0, 0, 0, 0.02);
+}
+
+.attribute
+{
+    display: inline;
+    color: white;
+    padding: 3px;
+    border-radius: 5px;
+    /*background-color: green;*/
+}
+
+.outer-div
+{
+    margin-bottom:5px;
+}

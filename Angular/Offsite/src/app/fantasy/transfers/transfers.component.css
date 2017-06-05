@@ -1,0 +1,22 @@
+.left
+{
+
+}
+
+.right
+{
+
+}
+
+.class-padd
+{
+    /*border: black 2px solid;
+    border-radius: 5px;*/
+    padding: 5px;
+    min-height: 600px;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd)
+{
+    background-color: #c9ecc1;
+}

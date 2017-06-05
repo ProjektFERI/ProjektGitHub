@@ -41,6 +41,18 @@ app.all('/*', function(request, response, next)
 var user = require('./routes/user');
 app.use('/user', user);
 
+var fantasy = require('./routes/fantasy');
+app.use('/fantasy', fantasy);
+
+var statistics = require('./routes/statistics');
+app.use('/statistics', statistics);
+
+var userlist = require('./routes/userlist');
+app.use('/userlist', userlist);
+
+var showteam = require('./routes/showteam');
+app.use('/showteam', showteam);
+
 
 //----------- ZACETEK POSLUSANJA -----------
 

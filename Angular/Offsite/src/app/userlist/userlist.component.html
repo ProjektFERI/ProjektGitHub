@@ -1,0 +1,21 @@
+<div class="container">
+    <h2>User List</h2>
+    <hr>
+
+    <div style="overflow-y: auto; min-height:150px; max-height:550px">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+          <th>Username</th><th>Prestige</th><th>Team</th>
+          </tr>
+        </thead>
+          <tbody>
+            <tr *ngFor="let user of listUserlist">
+            <td>{{user.username}}</td>
+            <td>{{user.prestige}}</td>
+            <th><button class="btn btn-default btn-sm" routerLink="/showteam" (click)="onCheckTeam(user)">Check Team</button></th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>

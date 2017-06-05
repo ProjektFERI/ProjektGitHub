@@ -18,6 +18,11 @@
     </div>
 
     <div class="content">
+        <label for="password">Team name:</label>
+        <input type="text" class="form-control" id="teamName" placeholder="Fantasy Team Name" autocomplete="off" [(ngModel)]="user.teamName">
+    </div>
+
+    <div class="content">
         <button class="btn btn-success" id="btnSignUp" (click)="signUp()">Sign-up</button>
     </div>
 

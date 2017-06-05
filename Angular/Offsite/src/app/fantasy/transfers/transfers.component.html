@@ -1,0 +1,103 @@
+<div class="row" style="height:100%;">
+    <div class="col-md-8 left">
+        <div class="class-padd">
+            <h4>Selection:</h4><hr>
+            <div class="pitch">
+                <img src="../../assets/Images/pitch.png" style="max-width:770px">
+            </div>
+            <div>
+                <h4>Team info:</h4>
+                <b>Team: </b>{{UserTeam.name}}<br>
+                <b>Transfers: </b>{{UserTeam.transfers}}<br>
+                <b>Value: </b>{{UserTeam.value}}M<br>
+                <b>Budget: </b>{{UserTeam.budget}}M<hr>
+                <h4>Player info:</h4>
+                <b>Goalkeepers: </b>{{UserTeam.gks}}/2<br>
+                <b>Defenders: </b>{{UserTeam.defs}}/5<br>
+                <b>Midfielders: </b>{{UserTeam.mids}}/5<br>
+                <b>Forwards: </b>{{UserTeam.fwds}}/3<hr>
+                <div *ngIf="this.globalService.CanUpdateTeam.boolValue">
+                    <button class="btn btn-success" (click)="updateSelectedPlayers()">Update team</button>
+                </div>
+                <h4>Selected players:</h4>
+                <div style="overflow-y: auto; max-height:750px">
+                    <table>
+                        <tr *ngFor="let player of SelectedPlayers">
+                            <app-player-min [_Player]="player" (playerSelected)="handlePlayerSelected($event)"></app-player-min>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 right">
+        <div class="class-padd">
+            <div id="players">
+                <div class="form-group">
+                    <label for="selection">Select by position:</label>
+                    <select class="form-control" id="selectPosition" (change)="onChangePosition($event)">
+                        <option *ngFor="let position of Positions" [value]="position.value">{{position.content}}</option>
+                    </select>
+                </div>
+
+                <label>Select by name:</label>
+                <input type="text" class="form-control" placeholder="Player name" [(ngModel)]="SearchByName">
+                <button class="btn btn-default btn-sm" style="margin-top:3px" (click)="onSearchClick()">Search</button>
+
+                <br><br>
+
+                <div class="form-group">
+                    <label for="selection">Sort by:</label>
+                    <select class="form-control" id="selectPosition" (change)="onChangeOption($event)">
+                        <option *ngFor="let option of Options" [value]="option.value">{{option.content}}</option>
+                    </select>
+                </div>
+
+                <hr>
+
+                <h4>Player selection:</h4>
+                <div style="overflow-y: auto; min-height:150px;  max-height:650px">
+                    <div *ngIf="ListOfPlayers == null">
+                        No players match your search pattern
+                    </div>
+                    <div *ngIf="ListOfPlayers != null">
+                    <!--    <ul>
+                            <li *ngFor="let player of ListOfPlayers">
+                                <img src={{player.photo}} style="border: 1px grey solid; border-radius:90px;">
+                                {{player.name}}
+                            </li>
+                        </ul> -->
+                        <table class="table table-striped">
+                            <tr *ngFor="let player of ListOfPlayers">
+                                <app-player-min [_Player]="player" (playerSelected)="handlePlayerSelected($event)"></app-player-min>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <hr>
+                <h4>Recommended:</h4>
+                <div style="overflow-y: auto; min-height:150px; max-height:650px">
+                    <div *ngIf="recPlayers == null">
+                        No players match your search pattern
+                    </div>
+                    <div *ngIf="recPlayers != null">
+                    <!--    <ul>
+                            <li *ngFor="let player of ListOfPlayers">
+                                <img src={{player.photo}} style="border: 1px grey solid; border-radius:90px;">
+                                {{player.name}}
+                            </li>
+                        </ul> -->
+                        <table class="table table-striped">
+                            <tr *ngFor="let player of recPlayers">
+                                <app-player-min [_Player]="player" (playerSelected)="handlePlayerSelected($event)"></app-player-min>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!--    <div class="class-padd">
+            test
+        </div> -->
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<h3>Offsite Fantasy League</h3>
+<div class="league-container" style="width:65%">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Team</th>
+                <th>W</th>
+                <th>D</th>
+                <th>L</th>
+                <th>F</th>
+                <th>A</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody>
+             <tr *ngFor="let team of allTeams; let i = index">
+                <td>{{i + 1}}</td>
+                <td>{{team.name}}</td>
+                <th>{{team.wins}}</th>
+                <th>{{team.draws}}</th>
+                <th>{{team.losses}}</th>
+                <th>{{team.goals_for}}</th>
+                <th>{{team.goals_against}}</th>
+                <td>{{(team.wins * 3) + team.draws}}</td>
+             </tr>
+        </tbody>
+    </table>
+</div>

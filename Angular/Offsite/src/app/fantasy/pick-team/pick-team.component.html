@@ -1,0 +1,162 @@
+<div class="row" style="height:100%">
+<!--    <div class="col-sm-4">
+        <div class="class-padd">
+            <div class="pitch">
+                <img src="../../assets/Images/pitch.png" style="width:400px">
+            </div>
+        </div>
+    </div> -->
+    <div class="col-sm-12">
+        <div class="class-padd" style="width:75%">
+            <div class="row">
+                <div class="col-sm-4">
+                    <h4>Team info: <i>{{UserTeam.name}}</i></h4>
+                    <!--<b>Value: </b>{{UserTeam.value}}M<br>-->
+                    <b>Current formation: </b>{{UserTeam.formation}}<br>
+                    <b>Change formation: </b>
+                    <select class="form-control" (change)="onChangeFormation($event)" style="width:auto; display: inline; min-width:30px;">
+                        <option *ngFor="let formation of Formations" [value]="formation">{{formation}}</option>
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <h4>Selected:</h4>
+                    <b>Goalkeepers: </b>{{SelectedGKs}}<br>
+                    <b>Defenders: </b>{{SelectedDefs}}<br>
+                    <b>Midfielders: </b>{{SelectedMids}}<br>
+                    <b>Forwards: </b>{{SelectedFwds}}<br>
+                </div>
+                <div class="col-sm-4">
+                    <div *ngIf="CanUpdateTeam" style="text-align:center; padding-top:30px;">
+                        <button class="btn btn-success" (click)="onSaveChanges()">Save changes</button>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div style="overflow-y: scroll; max-height:350px">
+                <table class="table-striped" style="width:100%;">
+                    <tr *ngFor="let player of SelectedPlayers">
+                        <td>
+                            <img src={{player.photo}} style="border: 1px grey solid; border-radius:90px; width:64px; height:64px;">
+                        </td>
+                        <td style="padding-left:20px;">
+                            <h5>{{player.name}}</h5>
+                        </td>
+                        <td style="padding-left:20px;">
+                            <h5>{{player.overall}}</h5>
+                        </td>
+                        <td style="padding-left:20px;">
+                            <h5>{{player.position}}</h5>
+                        </td>
+                        <td style="padding-left:20px;">
+                            <button class="btn btn-success btn-sm" (click)="onPlayerSelect(player)" data-toggle="modal" data-target="#playerModal">Show details</button>
+                        </td>
+                        <td style="padding-left:5px;">
+                            <div class="checkbox">
+                                <label><input type="checkbox" value="true" (change)="onToStartingXI(player)">In starting XI</label>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="playerModal" role="dialog" *ngIf="SelectedPlayer">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">{{SelectedPlayer.name}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="class-padd-modal">
+                            <img src={{SelectedPlayer.photo}}  style="border: 1px grey solid; border-radius:90px;">
+                            <div style="margin-top:10px">
+                                <b>Position: </b>{{SelectedPlayer.position}}<br>
+                                <b>Overall: </b><div style="display:inline" class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.overall)">{{SelectedPlayer.overall}}</div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="class-padd-modal">
+                            <h4>Attacking:</h4>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.crossing)">{{SelectedPlayer.crossing}}</div> Crossing</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.finishing)">{{SelectedPlayer.finishing}}</div> Finishing</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.heading)">{{SelectedPlayer.heading}}</div> Heading</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.short_passing)">{{SelectedPlayer.short_passing}}</div> Short passing</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.volleys)">{{SelectedPlayer.volleys}}</div> Volleys</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="class-padd-modal">
+                            <h4>Skill:</h4>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.dribbling)">{{SelectedPlayer.dribbling}}</div> Dribbling</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.curve)">{{SelectedPlayer.curve}}</div> Curve</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.free_kicks)">{{SelectedPlayer.free_kicks}}</div> Free kicks</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.long_passing)">{{SelectedPlayer.long_passing}}</div> Long passing</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.ball_controll)">{{SelectedPlayer.ball_controll}}</div> Ball control</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="class-padd-modal">
+                            <h4>Movement:</h4>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.acceleration)">{{SelectedPlayer.acceleration}}</div> Acceleration</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.sprint_speed)">{{SelectedPlayer.sprint_speed}}</div> Sprint speed</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.agility)">{{SelectedPlayer.agility}}</div> Agility</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.reactions)">{{SelectedPlayer.reactions}}</div> Reactions</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.balance)">{{SelectedPlayer.balance}}</div> Balance</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:10px">
+                    <div class="col-sm-3">
+                        <div class="class-padd-modal">
+                            <h4>Power:</h4>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.shot_power)">{{SelectedPlayer.shot_power}}</div> Shot power</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.jumping)">{{SelectedPlayer.jumping}}</div> Jumping</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.stamina)">{{SelectedPlayer.stamina}}</div> Stamina</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.strength)">{{SelectedPlayer.strength}}</div> Strength</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.long_shots)">{{SelectedPlayer.long_shots}}</div> Long shots</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="class-padd-modal">
+                            <h4>Mentality:</h4>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.aggression)">{{SelectedPlayer.aggression}}</div> Aggression</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.interceptions)">{{SelectedPlayer.interceptions}}</div> Interceptions</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.positioning)">{{SelectedPlayer.positioning}}</div> Positioning</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.vision)">{{SelectedPlayer.vision}}</div> Vision</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.penalties)">{{SelectedPlayer.penalties}}</div> Penalties</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.composure)">{{SelectedPlayer.composure}}</div> Composure</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="class-padd-modal">
+                            <h4>Defending:</h4>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.marking)">{{SelectedPlayer.marking}}</div> Marking</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.stand_tackle)">{{SelectedPlayer.stand_tackle}}</div> Stand tackle</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.slide_tackle)">{{SelectedPlayer.slide_tackle}}</div> Slide tackle</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="class-padd-modal">
+                            <h4>Goalkeeping:</h4>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.GK_diving)">{{SelectedPlayer.GK_diving}}</div> Diving</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.GK_handling)">{{SelectedPlayer.GK_handling}}</div> Handling</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.GK_kicking)">{{SelectedPlayer.GK_kicking}}</div> Kicking</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.GK_positioning)">{{SelectedPlayer.GK_positioning}}</div> Positioning</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.GK_reflexes)">{{SelectedPlayer.GK_reflexes}}</div> Reflexes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

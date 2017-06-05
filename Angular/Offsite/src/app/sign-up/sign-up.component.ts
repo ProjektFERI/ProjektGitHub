@@ -23,6 +23,7 @@ export class SignUpComponent
         this.user.username = '';
         this.user.password = '';
         this.user.email = '';
+        this.user.teamName = '';
     }
 
 

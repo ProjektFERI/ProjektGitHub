@@ -3,14 +3,12 @@
     <hr>
 
     <ul class="nav nav-tabs">
-        <li class="active"><a>My League</a></li>
-        <li><a>Pick team</a></li>
-        <li><a>Transfers</a></li>
-        <li><a>Statistics</a></li>
-        <li><a>Help</a></li>
+        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="league">League</a></li>
+        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="pick-team">Pick team</a></li>
+        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="transfers">Transfers</a></li>
+        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="statistics">Statistics</a></li>
+        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="help">Help</a></li>
     </ul>
     <br>
-    <div class="pitch">
-        <img src="../../assets/Images/pitch.png">
-    </div>
+    <router-outlet></router-outlet>
 </div>

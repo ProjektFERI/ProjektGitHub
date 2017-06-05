@@ -1,0 +1,118 @@
+<div *ngIf="_Player">
+    <h4><b>{{_Player.name}}</b></h4>
+    <div class="col-sm-6" style="padding-bottom:5px;">
+        <img src={{_Player.photo}} style="border: 1px grey solid; border-radius:90px;">
+    </div>
+    <div class="col-sm-6" style="padding-bottom:5px;">
+        <b>Position: </b>{{_Player.position}}<br>
+        <b>Overall: </b>{{_Player.overall}}<br>
+        <b>Value: </b>{{_Player.value}}M<br>
+        <b>Club: </b>{{_Player.club}}<br>
+        <div *ngIf="CanSelect">
+            <button class="btn btn-success"  (click)="select_deselect()">Select</button>
+        </div>
+        <div *ngIf="!CanSelect">
+            <button class="btn btn-danger" (click)="select_deselect()">De-select</button>
+        </div>
+        <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#playerModal">Details</button>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="playerModal" role="dialog" *ngIf="_Player">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">{{_Player.name}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="class-padd-modal">
+                            <img src={{_Player.photo}}  style="border: 1px grey solid; border-radius:90px;">
+                            <div style="margin-top:10px">
+                                <b>Position: </b>{{_Player.position}}<br>
+                                <b>Overall: </b><div style="display:inline" class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.overall)">{{_Player.overall}}</div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="class-padd-modal">
+                            <h4>Attacking:</h4>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.crossing)">{{_Player.crossing}}</div> Crossing</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.finishing)">{{_Player.finishing}}</div> Finishing</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.heading)">{{_Player.heading}}</div> Heading</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.short_passing)">{{_Player.short_passing}}</div> Short passing</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.volleys)">{{_Player.volleys}}</div> Volleys</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="class-padd-modal">
+                            <h4>Skill:</h4>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.dribbling)">{{_Player.dribbling}}</div> Dribbling</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.curve)">{{_Player.curve}}</div> Curve</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.free_kicks)">{{_Player.free_kicks}}</div> Free kicks</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.long_passing)">{{_Player.long_passing}}</div> Long passing</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.ball_controll)">{{_Player.ball_controll}}</div> Ball control</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="class-padd-modal">
+                            <h4>Movement:</h4>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.acceleration)">{{_Player.acceleration}}</div> Acceleration</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.sprint_speed)">{{_Player.sprint_speed}}</div> Sprint speed</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.agility)">{{_Player.agility}}</div> Agility</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.reactions)">{{_Player.reactions}}</div> Reactions</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.balance)">{{_Player.balance}}</div> Balance</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:10px">
+                    <div class="col-sm-3">
+                        <div class="class-padd-modal">
+                            <h4>Power:</h4>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.shot_power)">{{_Player.shot_power}}</div> Shot power</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.jumping)">{{_Player.jumping}}</div> Jumping</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.stamina)">{{_Player.stamina}}</div> Stamina</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.strength)">{{_Player.strength}}</div> Strength</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.long_shots)">{{_Player.long_shots}}</div> Long shots</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="class-padd-modal">
+                            <h4>Mentality:</h4>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.aggression)">{{_Player.aggression}}</div> Aggression</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.interceptions)">{{_Player.interceptions}}</div> Interceptions</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.positioning)">{{_Player.positioning}}</div> Positioning</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.vision)">{{_Player.vision}}</div> Vision</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.penalties)">{{_Player.penalties}}</div> Penalties</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.composure)">{{_Player.composure}}</div> Composure</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="class-padd-modal">
+                            <h4>Defending:</h4>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.marking)">{{_Player.marking}}</div> Marking</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.stand_tackle)">{{_Player.stand_tackle}}</div> Stand tackle</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.slide_tackle)">{{_Player.slide_tackle}}</div> Slide tackle</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="class-padd-modal">
+                            <h4>Goalkeeping:</h4>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.GK_diving)">{{_Player.GK_diving}}</div> Diving</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.GK_handling)">{{_Player.GK_handling}}</div> Handling</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.GK_kicking)">{{_Player.GK_kicking}}</div> Kicking</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.GK_positioning)">{{_Player.GK_positioning}}</div> Positioning</div>
+                            <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(_Player.GK_reflexes)">{{_Player.GK_reflexes}}</div> Reflexes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
