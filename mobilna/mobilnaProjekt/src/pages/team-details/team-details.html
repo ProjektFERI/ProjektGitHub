@@ -1,0 +1,50 @@
+<ion-header>
+	<ion-navbar color="navbar">
+		<ion-title>Team: {{SelectedTeam.name}}</ion-title>
+		<ion-buttons end>
+			<button ion-button (click)="closeModal()">Close</button>
+		</ion-buttons>
+  	</ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+	<ion-grid>
+		<ion-row style="font-size:16px;">
+				<ion-col col-6>
+					<div class="class-padd-modal">
+						<h4>Info:</h4>
+						<b>Value: </b>{{SelectedTeam.value}}M<br>
+						<b>Formation: </b>{{SelectedTeam.formation}}<br>
+					</div>
+				</ion-col>
+				<ion-col col-6>
+					<div class="class-padd-modal">
+						<h4>Standings:</h4>
+						<b>Wins: </b>{{SelectedTeam.wins}}<br>
+						<b>Draws: </b>{{SelectedTeam.draws}}<br>
+						<b>Losses: </b>{{SelectedTeam.losses}}<br>
+						<b>Goals scored: </b>{{SelectedTeam.goals_for}}<br>
+						<b>Goals conceded: </b>{{SelectedTeam.goals_against}}<br>
+						<b>Points collected: </b>{{SelectedTeam.points}}<br>
+					</div>
+				</ion-col>
+		</ion-row>
+		<ion-row>
+			<h2>Players:</h2>
+
+			<table class="table table-striped">
+				<tbody>
+					<tr *ngFor="let player of Players" style="padding: 10px">
+						<td>
+							<h5><b>{{player.name}}</b></h5>
+								<div style="display:inline" class="outer-div"><div class="attribute" [style.background-color]="applyColor(player.overall)">{{player.overall}}</div></div>
+							</td>
+						<td><img src={{player.photo}} style="height: 75px; border: 1px grey solid; border-radius:90px; margin: 0px 10px 0px 10px" ></td>
+						<td><button ion-button color="secondary" small (click)="openModalPlayer(player)">Details</button></td>
+					</tr>
+  				</tbody>
+  			</table>
+		</ion-row>
+	</ion-grid>
+</ion-content>

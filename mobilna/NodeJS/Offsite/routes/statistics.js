@@ -6,7 +6,7 @@ var database            = require('../database');
 var databaseConnection  = database.getDatabaseConnection();                     //povezava do baze
 
 
-router.get('/mostValuableTeam', function(request, response)
+router.post('/mostValuableTeam', function(request, response)
 {
     var queryString = "SELECT * FROM team ORDER BY value DESC, points DESC LIMIT 1";
     databaseConnection.query(queryString, function(error, result)
@@ -16,7 +16,7 @@ router.get('/mostValuableTeam', function(request, response)
     });
 });
 
-router.get('/mostPickedPlayer', function(request, response)
+router.post('/mostPickedPlayer', function(request, response)
 {
     var queryString = "SELECT ID_player FROM team_player GROUP BY ID_player ORDER BY COUNT(*) DESC LIMIT 1";
     databaseConnection.query(queryString, function(error, result)
@@ -34,7 +34,7 @@ router.get('/mostPickedPlayer', function(request, response)
     });
 });
 
-router.get('/mostUsedFormation', function(request, response)
+router.post('/mostUsedFormation', function(request, response)
 {
     var queryString = "SELECT formation FROM team GROUP BY formation ORDER BY COUNT(*) DESC LIMIT 1";
     databaseConnection.query(queryString, function(error, result)
@@ -44,7 +44,7 @@ router.get('/mostUsedFormation', function(request, response)
     });
 });
 
-router.get('/mostWins', function(request, response)
+router.post('/mostWins', function(request, response)
 {
     var queryString = "SELECT * FROM team ORDER BY wins DESC, points DESC LIMIT 1";
     databaseConnection.query(queryString, function(error, result)
@@ -54,7 +54,7 @@ router.get('/mostWins', function(request, response)
     });
 });
 
-router.get('/mostDraws', function(request, response)
+router.post('/mostDraws', function(request, response)
 {
     var queryString = "SELECT * FROM team ORDER BY draws DESC, points DESC LIMIT 1";
     databaseConnection.query(queryString, function(error, result)
@@ -64,7 +64,7 @@ router.get('/mostDraws', function(request, response)
     });
 });
 
-router.get('/mostLosses', function(request, response)
+router.post('/mostLosses', function(request, response)
 {
     var queryString = "SELECT * FROM team ORDER BY losses DESC, points DESC LIMIT 1";
     databaseConnection.query(queryString, function(error, result)
@@ -74,7 +74,7 @@ router.get('/mostLosses', function(request, response)
     });
 });
 
-router.get('/mostGoalsScored', function(request, response)
+router.post('/mostGoalsScored', function(request, response)
 {
     var queryString = "SELECT * FROM team ORDER BY goals_for DESC, points DESC LIMIT 1";
     databaseConnection.query(queryString, function(error, result)
@@ -84,7 +84,7 @@ router.get('/mostGoalsScored', function(request, response)
     });
 });
 
-router.get('/mostGoalsConceded', function(request, response)
+router.post('/mostGoalsConceded', function(request, response)
 {
     var queryString = "SELECT * FROM team ORDER BY goals_against DESC, points DESC LIMIT 1";
     databaseConnection.query(queryString, function(error, result)
@@ -94,7 +94,7 @@ router.get('/mostGoalsConceded', function(request, response)
     });
 });
 
-router.get('/leastGoalsScored', function(request, response)
+router.post('/leastGoalsScored', function(request, response)
 {
     var queryString = "SELECT * FROM team WHERE points > 0 ORDER BY goals_for ASC, points DESC LIMIT 1";
     databaseConnection.query(queryString, function(error, result)
@@ -104,7 +104,7 @@ router.get('/leastGoalsScored', function(request, response)
     });
 });
 
-router.get('/leastGoalsConceded', function(request, response)
+router.post('/leastGoalsConceded', function(request, response)
 {
     var queryString = "SELECT * FROM team WHERE points > 0 ORDER BY goals_against ASC, points DESC LIMIT 1";
     databaseConnection.query(queryString, function(error, result)

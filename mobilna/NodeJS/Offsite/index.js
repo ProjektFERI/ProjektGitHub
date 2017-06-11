@@ -7,7 +7,7 @@ var session         = require('express-session');               //za delo s sejo
 var app  = express();                                           //instanca aplikacije z express
 var port = 8080;                                                //port na katerem tece streznik
 
-
+var stalniUrl = "http://89.212.174.86";
 app.use(bodyParser.json());                                                     // knjiznica, ki nam razparsa json na vhodu
 app.use(bodyParser.urlencoded({ extended: true }));                             // knjiznica, ki nam razparsa navadni url encoding
 app.use(cookieParser());                                                        //parsanje cookies
@@ -29,7 +29,7 @@ app.use(function(request, response, next)
 //dovolimo zahteve iz drugih domen
 app.all('/*', function(request, response, next)
 {
-    response.header("Access-Control-Allow-Origin", "http://localhost:4200");
+    response.header("Access-Control-Allow-Origin", "http://localhost:8100");
     response.header("Access-Control-Allow-Credentials", "true");
 
     response.header("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");

@@ -2,10 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { HelpPage } from '../help/help';
 import { LeaguePage } from '../league/league';
-import { PickTeamPage } from '../pick-team/pick-team';
 import { StatisticsPage } from '../statistics/statistics';
-import { TransfersPage } from '../transfers/transfers';
-
 
 @Component({
   selector: 'page-home',
@@ -16,6 +13,11 @@ export class HomePage {
   constructor(public navCtrl: NavController) {
 
   }
+
+  ligaShow(){
+    this.navCtrl.push(LeaguePage);
+  }
+
   statShow(){
     this.navCtrl.push(StatisticsPage);
   }

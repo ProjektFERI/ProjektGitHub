@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+
+import { LeagueProvider } from  '../../providers/league/league';
+
+import { TeamDetailsPage }			from '../team-details/team-details';
+import {Team} from '../../_models/team';
 
 /**
  * Generated class for the LeaguePage page.
@@ -13,8 +18,24 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'league.html',
 })
 export class LeaguePage {
+  allTeams : Team[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private leagueProvider: LeagueProvider, private modalController: ModalController) {
+
+    this.leagueProvider.fetchTeams(this.allTeams).subscribe(
+      response =>
+      {
+        this.allTeams = response;
+        console.log(this.allTeams);
+      }
+    )
+  }
+
+  openModalTeam(team : Team)
+  {
+    const modal = this.modalController.create(TeamDetailsPage, {pTeam : team});
+
+    modal.present();
   }
 
   ionViewDidLoad() {

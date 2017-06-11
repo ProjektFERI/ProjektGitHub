@@ -1,5 +1,7 @@
-import { Injectable, EventEmitter, Output }        from '@angular/core';
+import { Injectable }        from '@angular/core';
 import { Observable, Observer }      from 'rxjs/Rx';
+import { Team }						from '../../_models/team';
+import { Player }					from '../../_models/player';
 
 /*
  * GLOBAL SERVICE - globalni service za celotno aplikacijo
@@ -30,75 +32,6 @@ export class RefObject
     boolValue : boolean;
 }
 
-
-export class Player
-{
-    ID              : number;
-    name            : string;
-    position        : string;
-    club            : string;
-    photo           : string;
-    overall         : number;
-    value           : number;
-    skills          : number;
-    crossing        : number;
-    finishing       : number;
-    heading         : number;
-    short_passing   : number;
-    volleys         : number;
-    dribbling       : number;
-    curve           : number;
-    free_kicks       : number;
-    long_passing    : number;
-    ball_controll   : number;
-    acceleration    : number;
-    sprint_speed    : number;
-    agility         : number;
-    reactions       : number;
-    balance         : number;
-    shot_power      : number;
-    jumping         : number;
-    stamina         : number;
-    strength        : number;
-    long_shots      : number;
-    aggression      : number;
-    interceptions   : number;
-    positioning     : number;
-    vision          : number;
-    penalties       : number;
-    composure       : number;
-    marking         : number;
-    stand_tackle    : number;
-    slide_tackle    : number;
-    GK_diving       : number;
-    GK_handling     : number;
-    GK_kicking      : number;
-    GK_positioning  : number;
-    GK_reflexes     : number;
-}
-
-
-export class Team
-{
-    ID              : number;
-    ID_user         : number;
-    name            : string;
-    budget          : number;
-    value           : number;
-    transfers       : number;
-    formation       : string;
-    is_playable     : boolean;
-    gks             : number;
-    defs            : number;
-    mids            : number;
-    fwds            : number;
-    wins            : number;
-    draws           : number;
-    losses          : number;
-    points          : number;
-    goals_for       : number;
-    goals_against   : number;
-}
 
 @Injectable()
 export class GlobalProvider

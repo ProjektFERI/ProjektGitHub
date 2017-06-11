@@ -18,17 +18,17 @@
   <ion-list >
 
     <ion-item class="loginV">
-      <ion-label style="color:#ffffff" floating>Username</ion-label>
-      <ion-input type="text" [(ngModel)]="username" ></ion-input>
+      <ion-label for="username" style="color:#ffffff" floating>Username</ion-label>
+      <ion-input type="text" id="username" [(ngModel)]="user.username" ></ion-input>
     </ion-item>
 
     <ion-item class="loginV">
-      <ion-label style="color:#ffffff" floating>Password</ion-label>
-      <ion-input type="password" [(ngModel)]="password" ></ion-input>
+      <ion-label for="password" style="color:#ffffff" floating>Password</ion-label>
+      <ion-input type="password" id="password" [(ngModel)]="user.password" ></ion-input>
     </ion-item>
 
     <ion-item class="loginV">
-      <button  ion-button icon-left color="light" (click)="signIn()">
+      <button  ion-button icon-left color="light" (click)="signInR()">
         <ion-icon name="key"></ion-icon>
         Sign-in
       </button>

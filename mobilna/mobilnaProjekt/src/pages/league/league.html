@@ -6,13 +6,40 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>league</ion-title>
+  <ion-navbar color="svetloGreen">
+    <ion-title>My League</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content padding class="ozadjeLiga">
+  <div class="league-container" >
+      <table class="table table-hover" id="tabelaBck">
+          <thead>
+              <tr>
+                  <th>#</th>
+                  <th>Team</th>
+                  <th>W</th>
+                  <th>D</th>
+                  <th>L</th>
+                  <th>F</th>
+                  <th>A</th>
+                  <th>Points</th>
+              </tr>
+          </thead>
+          <tbody>
+               <tr *ngFor="let team of allTeams; let i = index">
+                  <td>{{i + 1}}</td>
+                  <th><button ion-button clear (click)="openModalTeam(team)">{{team.name}}</button></th>
+                  <th>{{team.wins}}</th>
+                  <th>{{team.draws}}</th>
+                  <th>{{team.losses}}</th>
+                  <th>{{team.goals_for}}</th>
+                  <th>{{team.goals_against}}</th>
+                  <th>{{(team.wins * 3) + team.draws}}</th>
+               </tr>
+          </tbody>
+      </table>
+  </div>
 </ion-content>

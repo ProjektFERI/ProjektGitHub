@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Http, HttpModule, Headers, Response }  from '@angular/http';
-import { Observable }  from 'rxjs/Observable';
-import { UserProvider, Team, Player } from '../../providers/user/user';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+
+import { StatisticsProvider } from '../../providers/statistics/statistics';
+import { Player }			from '../../_models/player';
+import { Team }			from '../../_models/team';
+import { PlayerDetailsPage }		from '../player-details/player-details';
+import { TeamDetailsPage }			from '../team-details/team-details';
 
 /**
  * Generated class for the StatisticsPage page.
@@ -15,134 +18,98 @@ import { UserProvider, Team, Player } from '../../providers/user/user';
   selector: 'page-statistics',
   templateUrl: 'statistics.html',
 })
-export class StatisticsPage {
+export class StatisticsPage
+{
+	 MostValuableTeam   : Team;
+	 MostPickedPlayer   : Player;
+	 SelectedPlayer 	: Player;
+	 MostUsedFormation	: string;
+	 MostWins			: Team;
+	 MostDraws			: Team;
+	 MostLosses			: Team;
+	 MostGoalsScored	: Team;
+	 MostGoalsConceded	: Team;
+	 LeastGoalsScored	: Team;
+	 LeastGoalsConceded	: Team;
 
-  constructor(public http: Http, public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad StatisticsPage');
-  }
-  public baseUrl: string = 'http://localhost/8080';
-
-
-      getMostValuableTeam() : Observable<Team>
-      {
-          return this.http.get(this.baseUrl + '/statistics/mostValuableTeam', { headers : this.getHeaders(), withCredentials : true })
-                          .map((response : Response) =>
-                          {
-                              let res = response.json();
-                              console.log("MostValuableTeam");
-                              console.log(res);
-                              return res;
-                          })
-      }
-
-      getMostPickedPlayer() : Observable<Player>
-      {
-          return this.http.get(this.baseUrl + 'statistics/mostPickedPlayer', { headers : this.getHeaders(), withCredentials : true })
-                          .map((response : Response) =>
-                          {
-                              let res = response.json();
-                              console.log("MostPickedPlayer");
-                              return res[0];
-                          })
-      }
-
-      getMostUsedFormation() : Observable<string>
-      {
-          return this.http.get(this.baseUrl + 'statistics/mostUsedFormation', { headers : this.getHeaders(), withCredentials : true })
-                          .map((response : Response) =>
-                          {
-                              let res = response.json();
-                              console.log("MostUsedFormation");
-                              return res;
-                          })
-      }
-
-      getTeamWithMostWins() : Observable<Team>
-      {
-          return this.http.get(this.baseUrl + 'statistics/mostWins', { headers : this.getHeaders(), withCredentials : true })
-                          .map((response : Response) =>
-                          {
-                              let res = response.json();
-                              console.log("MostWins");
-                              return res;
-                          })
-      }
-
-      getTeamWithMostDraws() : Observable<Team>
-      {
-          return this.http.get(this.baseUrl + 'statistics/mostDraws', { headers : this.getHeaders(), withCredentials : true })
-                          .map((response : Response) =>
-                          {
-                              let res = response.json();
-                              console.log("MostDraws");
-                              return res;
-                          })
-      }
-
-      getTeamWithMostLosses() : Observable<Team>
-      {
-          return this.http.get(this.baseUrl + 'statistics/mostLosses', { headers : this.getHeaders(), withCredentials : true })
-                          .map((response : Response) =>
-                          {
-                              let res = response.json();
-                              console.log("MostLosses");
-                              return res;
-                          })
-      }
-
-      getMostGoalsScored() : Observable<Team>
-      {
-          return this.http.get(this.baseUrl + 'statistics/mostGoalsScored', { headers : this.getHeaders(), withCredentials : true })
-                          .map((response : Response) =>
-                          {
-                              let res = response.json();
-                              console.log("MostGoalsScored");
-                              return res;
-                          })
-      }
-
-      getMostGoalsConceded() : Observable<Team>
-      {
-          return this.http.get(this.baseUrl + 'statistics/mostGoalsConceded', { headers : this.getHeaders(), withCredentials : true })
-                          .map((response : Response) =>
-                          {
-                              let res = response.json();
-                              console.log("MostGoalsConceded");
-                              return res;
-                          })
-      }
-
-      getLeastGoalsScored() : Observable<Team>
-      {
-          return this.http.get(this.baseUrl + 'statistics/leastGoalsScored', { headers : this.getHeaders(), withCredentials : true })
-                          .map((response : Response) =>
-                          {
-                              let res = response.json();
-                              console.log("LeastGoalsScored");
-                              return res;
-                          })
-      }
-
-      getLeastGoalsConceded() : Observable<Team>
-      {
-          return this.http.get(this.baseUrl + 'statistics/leastGoalsConceded', { headers : this.getHeaders(), withCredentials : true })
-                          .map((response : Response) =>
-                          {
-                              let res = response.json();
-                              console.log("LeastGoalsConceded");
-                              return res;
-                          })
-      }
+	constructor(public navCtrl: NavController, public navParams: NavParams, private statisticsProvider : StatisticsProvider, private modalController : ModalController)
+	{
+		this.statisticsProvider.getMostValuableTeam().subscribe(
+            response =>
+            {
+                this.MostValuableTeam = response;
+            }
+        )
+        this.statisticsProvider.getMostPickedPlayer().subscribe(
+            response =>
+            {
+                this.MostPickedPlayer = response;
+                this.SelectedPlayer = response;
+            }
+        )
+        this.statisticsProvider.getMostUsedFormation().subscribe(
+            response =>
+            {
+                this.MostUsedFormation = response;
+            }
+        )
+        this.statisticsProvider.getTeamWithMostWins().subscribe(
+            response =>
+            {
+                this.MostWins = response;
+            }
+        )
+        this.statisticsProvider.getTeamWithMostDraws().subscribe(
+            response =>
+            {
+                this.MostDraws = response;
+            }
+        )
+        this.statisticsProvider.getTeamWithMostLosses().subscribe(
+            response =>
+            {
+                this.MostLosses = response;
+            }
+        )
+        this.statisticsProvider.getMostGoalsScored().subscribe(
+            response =>
+            {
+                this.MostGoalsScored = response;
+            }
+        )
+        this.statisticsProvider.getMostGoalsConceded().subscribe(
+            response =>
+            {
+                this.MostGoalsConceded = response;
+            }
+        )
+        this.statisticsProvider.getLeastGoalsScored().subscribe(
+            response =>
+            {
+                this.LeastGoalsScored = response;
+            }
+        )
+        this.statisticsProvider.getLeastGoalsConceded().subscribe(
+            response =>
+            {
+                this.LeastGoalsConceded = response;
+            }
+        )
+	}
 
 
-      private getHeaders()
-      {
-          var headers = new Headers();
-          headers.append('Accept', 'application/json');
-          return headers;
-      }
+	openModalPlayer()
+	{
+		const modal = this.modalController.create(PlayerDetailsPage, {pPlayer : this.MostPickedPlayer});
 
+		modal.present();
+	}
+
+
+	openModalTeam(team : Team)
+	{
+		const modal = this.modalController.create(TeamDetailsPage, {pTeam : team});
+
+		modal.present();
+	}
 }

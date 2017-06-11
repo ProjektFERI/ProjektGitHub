@@ -1,200 +1,113 @@
-<!--
-  Generated template for the StatisticsPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="svetloGreen">
     <ion-title>Statistics</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-  <div class="row">
-      <div class="col-sm-4">
-          <div class="class-padd" style="min-height:210px" *ngIf="MostPickedPlayer">
-              <h4>Most picked player: <b> {{MostPickedPlayer.name}}</b></h4>
-              <div class="row">
-                  <div class="col-sm-4">
-                      <img src={{MostPickedPlayer.photo}} style="border: 2px grey solid; border-radius:90px;" >
-                  </div>
-                  <div class="col-sm-8">
-                      <div class="class-padd-2">
-                          <b>Value: </b>{{MostPickedPlayer.value}}M<br>
-                          <b>Position: </b>{{MostPickedPlayer.position}}<br>
-                          <b>Club: </b>{{MostPickedPlayer.club}}<hr>
-                          <button class="btn btn-success" data-toggle="modal" data-target="#playerModal">Player details</button>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="col-sm-4">
-          <div class="class-padd" style="min-height:210px" *ngIf="MostValuableTeam">
-              <h4>Most valuable team: <b> {{MostValuableTeam.name}}</b></h4>
-              <b>Value: </b>{{MostValuableTeam.value}}M<br>
-              <b>Formation: </b>{{MostValuableTeam.formation}}<br>
-              <b>Wins: </b>{{MostValuableTeam.wins}}<br>
-              <b>Draws: </b>{{MostValuableTeam.draws}}<br>
-              <b>Losses: </b>{{MostValuableTeam.losses}}<br>
-          </div>
-      </div>
-      <div class="col-sm-4">
-          <div class="class-padd" style="min-height:210px" *ngIf="MostUsedFormation">
-              <h4>Most used formation:</h4>
-              <h3>{{MostUsedFormation.formation}}</h3>
-          </div>
-      </div>
-  </div>
-  <div class="row">
-      <div class="col-sm-4">
-          <div class="class-padd" *ngIf="MostWins">
-              <h4>Most wins: <b> {{MostWins.name}}</b></h4>
-              <h3 style="display:inline">{{MostWins.wins}}</h3>
-          </div>
-      </div>
-      <div class="col-sm-4">
-          <div class="class-padd" *ngIf="MostDraws">
-              <h4>Most draws: <b> {{MostDraws.name}}</b></h4>
-              <h3 style="display:inline">{{MostWins.draws}}</h3>
-          </div>
-      </div>
-      <div class="col-sm-4">
-          <div class="class-padd" *ngIf="MostLosses">
-              <h4>Most losses: <b> {{MostLosses.name}}</b></h4>
-              <h3 style="display:inline">{{MostWins.losses}}</h3>
-          </div>
-      </div>
-  </div>
-  <div class="row">
-      <div class="col-sm-3">
-          <div class="class-padd" *ngIf="MostGoalsScored">
-              <h4>Most goals scored: <b> {{MostGoalsScored.name}}</b></h4>
-              <h3 style="display:inline">{{MostWins.goals_for}}</h3>
-          </div>
-      </div>
-      <div class="col-sm-3">
-          <div class="class-padd" *ngIf="MostGoalsConceded">
-              <h4>Most goals conceded: <b> {{MostGoalsConceded.name}}</b></h4>
-              <h3 style="display:inline">{{MostGoalsConceded.goals_against}}</h3>
-          </div>
-      </div>
-      <div class="col-sm-3">
-          <div class="class-padd" *ngIf="LeastGoalsScored">
-              <h4>Least goals scored: <b> {{LeastGoalsScored.name}}</b></h4>
-              <h3 style="display:inline">{{MostGoalsConceded.goals_for}}</h3>
-          </div>
-      </div>
-      <div class="col-sm-3">
-          <div class="class-padd" *ngIf="LeastGoalsConceded">
-              <h4>Least goals conceded: <b> {{LeastGoalsConceded.name}}</b></h4>
-              <h3 style="display:inline">{{LeastGoalsConceded.goals_against}}</h3>
-          </div>
-      </div>
-  </div>
+<ion-content padding class="ozadjeStat">
+	<ion-list >
+		<ion-item *ngIf="MostValuableTeam" class="ozadjeStat">
+			<div class="class-padd">
+				<h1 style="display:inline">Most valuable team: </h1>
+				<b><i style="font-size:22px">{{MostValuableTeam.name}}</i></b><br>
+				<b>Value: </b>{{MostValuableTeam.value}}M<br>
+				<b>Formation: </b>{{MostValuableTeam.formation}}<br>
+				<b>Wins: </b>{{MostValuableTeam.wins}}<br>
+				<b>Draws: </b>{{MostValuableTeam.draws}}<br>
+				<b>Losses: </b>{{MostValuableTeam.losses}}<br>
+				<button ion-button color="secondary" (click)="openModalTeam(MostValuableTeam)">Details</button>
+			</div>
+		</ion-item>
 
+		<ion-item *ngIf="MostPickedPlayer" class="ozadjeStat">
+			<div class="class-padd">
+				<h1>Most picked player:</h1>
+				<b> {{MostPickedPlayer.name}}</b><br>
+				<ion-grid>
+					<ion-row>
+						<ion-col col-6>
+							<div>
+								<img src={{MostPickedPlayer.photo}} style="border: 2px grey solid; border-radius:90px;" >
+							</div>
+						</ion-col>
+						<ion-col col-6>
+							<div>
+								<b>Value: </b>{{MostPickedPlayer.value}}M<br>
+								<b>Position: </b>{{MostPickedPlayer.position}}<br>
+								<b>Club: </b>{{MostPickedPlayer.club}}<br><br>
+								<button ion-button color="secondary" (click)="openModalPlayer()">Player details</button>
+							</div>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</div>
+		</ion-item>
 
-  <!-- Modal -->
-  <div class="modal fade" id="playerModal" role="dialog" *ngIf="SelectedPlayer">
-      <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">{{SelectedPlayer.name}}</h4>
-              </div>
-              <div class="modal-body">
-                  <div class="row">
-                      <div class="col-sm-3">
-                          <div class="class-padd-modal">
-                              <img src={{SelectedPlayer.photo}}  style="border: 1px grey solid; border-radius:90px;">
-                              <div style="margin-top:10px">
-                                  <b>Position: </b>{{SelectedPlayer.position}}<br>
-                                  <b>Overall: </b><div style="display:inline" class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.overall)">{{SelectedPlayer.overall}}</div></div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-sm-3">
-                          <div class="class-padd-modal">
-                              <h4>Attacking:</h4>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.crossing)">{{SelectedPlayer.crossing}}</div> Crossing</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.finishing)">{{SelectedPlayer.finishing}}</div> Finishing</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.heading)">{{SelectedPlayer.heading}}</div> Heading</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.short_passing)">{{SelectedPlayer.short_passing}}</div> Short passing</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.volleys)">{{SelectedPlayer.volleys}}</div> Volleys</div>
-                          </div>
-                      </div>
-                      <div class="col-sm-3">
-                          <div class="class-padd-modal">
-                              <h4>Skill:</h4>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.dribbling)">{{SelectedPlayer.dribbling}}</div> Dribbling</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.curve)">{{SelectedPlayer.curve}}</div> Curve</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.free_kicks)">{{SelectedPlayer.free_kicks}}</div> Free kicks</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.long_passing)">{{SelectedPlayer.long_passing}}</div> Long passing</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.ball_controll)">{{SelectedPlayer.ball_controll}}</div> Ball control</div>
-                          </div>
-                      </div>
-                      <div class="col-sm-3">
-                          <div class="class-padd-modal">
-                              <h4>Movement:</h4>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.acceleration)">{{SelectedPlayer.acceleration}}</div> Acceleration</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.sprint_speed)">{{SelectedPlayer.sprint_speed}}</div> Sprint speed</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.agility)">{{SelectedPlayer.agility}}</div> Agility</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.reactions)">{{SelectedPlayer.reactions}}</div> Reactions</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.balance)">{{SelectedPlayer.balance}}</div> Balance</div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="row" style="margin-top:10px">
-                      <div class="col-sm-3">
-                          <div class="class-padd-modal">
-                              <h4>Power:</h4>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.shot_power)">{{SelectedPlayer.shot_power}}</div> Shot power</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.jumping)">{{SelectedPlayer.jumping}}</div> Jumping</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.stamina)">{{SelectedPlayer.stamina}}</div> Stamina</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.strength)">{{SelectedPlayer.strength}}</div> Strength</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.long_shots)">{{SelectedPlayer.long_shots}}</div> Long shots</div>
-                          </div>
-                      </div>
-                      <div class="col-sm-3">
-                          <div class="class-padd-modal">
-                              <h4>Mentality:</h4>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.aggression)">{{SelectedPlayer.aggression}}</div> Aggression</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.interceptions)">{{SelectedPlayer.interceptions}}</div> Interceptions</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.positioning)">{{SelectedPlayer.positioning}}</div> Positioning</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.vision)">{{SelectedPlayer.vision}}</div> Vision</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.penalties)">{{SelectedPlayer.penalties}}</div> Penalties</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.composure)">{{SelectedPlayer.composure}}</div> Composure</div>
-                          </div>
-                      </div>
-                      <div class="col-sm-3">
-                          <div class="class-padd-modal">
-                              <h4>Defending:</h4>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.marking)">{{SelectedPlayer.marking}}</div> Marking</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.stand_tackle)">{{SelectedPlayer.stand_tackle}}</div> Stand tackle</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.slide_tackle)">{{SelectedPlayer.slide_tackle}}</div> Slide tackle</div>
-                          </div>
-                      </div>
-                      <div class="col-sm-3">
-                          <div class="class-padd-modal">
-                              <h4>Goalkeeping:</h4>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.GK_diving)">{{SelectedPlayer.GK_diving}}</div> Diving</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.GK_handling)">{{SelectedPlayer.GK_handling}}</div> Handling</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.GK_kicking)">{{SelectedPlayer.GK_kicking}}</div> Kicking</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.GK_positioning)">{{SelectedPlayer.GK_positioning}}</div> Positioning</div>
-                              <div class="outer-div"><div class="attribute" [style.background-color]="applyColor(SelectedPlayer.GK_reflexes)">{{SelectedPlayer.GK_reflexes}}</div> Reflexes</div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-          </div>
-      </div>
-  </div>
+		<ion-item *ngIf="MostUsedFormation" class="ozadjeStat">
+			<div class="class-padd">
+				<h1>Most used formation:</h1><br>
+				<b style="margin-left:5px">{{MostUsedFormation.formation}}</b><br>
+			</div>
+		</ion-item>
 
+		<ion-item *ngIf="MostWins" class="ozadjeStat">
+			<div class="class-padd">
+				<h1>Most wins: <b><i>{{MostWins.name}}</i></b></h1><br>
+				<b style="margin-left:5px">{{MostWins.wins}}</b><br>
+				<button ion-button color="secondary" (click)="openModalTeam(MostWins)">Details</button>
+			</div>
+		</ion-item>
+
+		<ion-item *ngIf="MostDraws" class="ozadjeStat">
+			<div class="class-padd">
+				<h1>Most draws: <b><i>{{MostDraws.name}}</i></b></h1><br>
+				<b style="margin-left:5px">{{MostDraws.draws}}</b><br>
+				<button ion-button color="secondary" (click)="openModalTeam(MostDraws)">Details</button>
+			</div>
+		</ion-item>
+
+		<ion-item *ngIf="MostLosses" class="ozadjeStat">
+			<div class="class-padd">
+				<h1>Most losses: <b><i>{{MostLosses.name}}</i></b></h1><br>
+				<b style="margin-left:5px">{{MostLosses.losses}}</b><br>
+				<button ion-button color="secondary" (click)="openModalTeam(MostLosses)">Details</button>
+			</div>
+		</ion-item>
+
+		<ion-item *ngIf="MostGoalsScored" class="ozadjeStat">
+			<div class="class-padd">
+				<h1>Most goals scored: <b><i>{{MostGoalsScored.name}}</i></b></h1><br>
+				<b style="margin-left:5px">{{MostGoalsScored.goals_for}}</b><br>
+				<button ion-button color="secondary" (click)="openModalTeam(MostGoalsScored)">Details</button>
+			</div>
+		</ion-item>
+
+		<ion-item *ngIf="MostGoalsConceded" class="ozadjeStat">
+			<div class="class-padd">
+				<h1>Most goals conceded: <b><i>{{MostGoalsConceded.name}}</i></b></h1><br>
+				<b style="margin-left:5px">{{MostGoalsConceded.goals_against}}</b><br>
+				<button ion-button color="secondary" (click)="openModalTeam(MostGoalsConceded)">Details</button>
+			</div>
+		</ion-item>
+
+		<ion-item *ngIf="LeastGoalsScored" class="ozadjeStat">
+			<div class="class-padd">
+				<h1>Least goals scored: <b><i>{{LeastGoalsScored.name}}</i></b></h1><br>
+				<b style="margin-left:5px">{{LeastGoalsScored.goals_for}}</b><br>
+				<button ion-button color="secondary" (click)="openModalTeam(LeastGoalsScored)">Details</button>
+			</div>
+		</ion-item>
+
+		<ion-item *ngIf="LeastGoalsConceded" class="ozadjeStat">
+			<div class="class-padd">
+				<h1>Least goals conceded: <b><i>{{LeastGoalsConceded.name}}</i></b></h1><br>
+				<b style="margin-left:5px">{{LeastGoalsConceded.goals_against}}</b><br>
+				<button ion-button color="secondary" (click)="openModalTeam(LeastGoalsConceded)">Details</button>
+			</div>
+		</ion-item>
+
+	</ion-list>
 </ion-content>

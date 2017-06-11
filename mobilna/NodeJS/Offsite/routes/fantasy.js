@@ -503,4 +503,18 @@ function log(overall, atk, def, mid, power, gk, aggression)
 }
 
 
+router.post('/ionic/playersOfTeam', function(request, response)
+{
+  var teamID = request.body.TeamID;
+  var queryString = "SELECT player.ID,name,position,club,photo,overall,value,skills,crossing,finishing,heading,short_passing," +
+                                "volleys,dribbling,curve,free_kicks,long_passing,ball_controll,acceleration,sprint_speed,agility,reactions,balance," +
+                                "shot_power,jumping,stamina,strength,long_shots,aggression,interceptions,positioning,vision,penalties,composure," +
+                                "marking,stand_tackle,slide_tackle,GK_diving,GK_handling,GK_kicking,GK_positioning,GK_reflexes " +
+                                "FROM player JOIN team_player ON player.ID = team_player.ID_player WHERE team_player.ID_team = " + teamID;
+  databaseConnection.query(queryString, function(error, result)
+  {
+    response.json(result);
+  });
+});
+
 module.exports = router;

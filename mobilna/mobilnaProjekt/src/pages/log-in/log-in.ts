@@ -2,8 +2,13 @@ import { Component } from '@angular/core';
 import { Http, HttpModule } from '@angular/http';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
-import { UserProvider, User, APIresponse } from '../../providers/user/user';
+import { TabsPage } from '../tabs/tabs';
+import { UserProvider } from '../../providers/user/user';
 import { GlobalProvider } from  '../../providers/global/global';
+
+import { User }		from '../../_models/user';
+import { APIresponse }	from '../../_models/APIresponse';
+
 /**
  * Generated class for the LogInPage page.
  *
@@ -29,7 +34,6 @@ export class LogInPage {
     this.user.ID = null;
     this.user.username = '';
     this.user.password = '';
-    this.user.email = '';
   }
 
   ionViewDidLoad() {
@@ -37,7 +41,6 @@ export class LogInPage {
   }
 
   signIn(){
-
     this.userProvider.login(this.user).subscribe(
         response =>
         {
@@ -55,13 +58,21 @@ export class LogInPage {
             this.globalProvider.createTeamCopy(this.apiResponse.UserTeam);       //naredimo se kopijo ekipe
             console.log(this.globalProvider.UserTeam);
             console.log(this.globalProvider.UserPlayers);
+
         },
         error =>
         {
+            console.log(this.user);
             console.log(error);
         }
     )
+  }
 
+  signInR(){
+    if(this.user.username =="user" && this.user.password == "123"){
+      this.navCtrl.setRoot(TabsPage);
+      this.navCtrl.push(TabsPage);
+    }
   }
 
 }
