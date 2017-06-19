@@ -1,22 +1,22 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { Component } 				from '@angular/core';
+import { IonicPage, NavController,
+	NavParams, ModalController } 	from 'ionic-angular';
 
-import { StatisticsProvider } from '../../providers/statistics/statistics';
-import { Player }			from '../../_models/player';
-import { Team }			from '../../_models/team';
+import { StatisticsProvider } 		from '../../providers/statistics/statistics';
+
+import { Team }						from '../../_models/team';
+import { Player }					from '../../_models/player';
+
 import { PlayerDetailsPage }		from '../player-details/player-details';
 import { TeamDetailsPage }			from '../team-details/team-details';
 
-/**
- * Generated class for the StatisticsPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+import { ShowteamPage } from '../showteam/showteam';
+
 @IonicPage()
 @Component({
   selector: 'page-statistics',
   templateUrl: 'statistics.html',
+  providers : [ StatisticsProvider ]
 })
 export class StatisticsPage
 {
@@ -100,16 +100,22 @@ export class StatisticsPage
 
 	openModalPlayer()
 	{
-		const modal = this.modalController.create(PlayerDetailsPage, {pPlayer : this.MostPickedPlayer});
 
-		modal.present();
+		this.navCtrl.push(PlayerDetailsPage, {pPlayer : this.MostPickedPlayer});
+
+		//const modal = this.modalController.create(PlayerDetailsPage, {pPlayer : this.MostPickedPlayer});
+		//modal.present();
+
 	}
 
 
 	openModalTeam(team : Team)
 	{
-		const modal = this.modalController.create(TeamDetailsPage, {pTeam : team});
 
-		modal.present();
+		this.navCtrl.push(ShowteamPage, {selectedTeam : team});
+
+		//const modal = this.modalController.create(ShowteamPage, {pTeam : team});
+		//modal.present();
+
 	}
 }

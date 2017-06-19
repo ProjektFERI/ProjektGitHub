@@ -1,141 +1,122 @@
-import { Injectable }        from '@angular/core';
-import { Observable, Observer }      from 'rxjs/Rx';
-import { Team }						from '../../_models/team';
-import { Player }					from '../../_models/player';
+import { Injectable } from '@angular/core';
+import { Http, Headers, Response } from '@angular/http';
+import 'rxjs/add/operator/map';
+import { Observable }               from 'rxjs/Observable';
 
-/*
- * GLOBAL SERVICE - globalni service za celotno aplikacijo
- * obstaja ena instanca celotnega servisa, ta je injectana v AppComponent (app.component.ts)
- *
- * loggedIn - spremenljivka, v kateri hranimo vrednost ali je uporabnik prijavljen ali ne,
- *            "bindamo" jo na property od NavBar, v tamkajsnjem konstruktorju subscribamo na dataChange tega servisa - ko se bo spremenila vrednost spremenljivke
- *            bo sprememba vidna tudi v NavBar
- *
- * UserTeam - spremenljivka, v kateri hranimo uporabnikovo ekipo, nastavi se ob prijavi, posodablja pa v Fantasy komponentah
- *
- * UserPlayers - polje kjer se hranijo vsi igralci ki jih je izbral uporabnik v ekipo
- *
- * --v prihodnje se mogoce vec globalnih spremenljivk--
-*/
-export class UserFull
-{
-    ID : number;
-    username    : string;
-    password    : string;
-    email       : string;
-    prestige    : number;
-}
+//my modules
+import { Storage } from '@ionic/storage';
+
+//classes
+import { Team }     from '../../_models/team';
+import { Player }     from '../../_models/player';
+import { User }     from '../../_models/user';
+import { APIresponse }     from '../../_models/APIresponse';
 
 
-export class RefObject
-{
-    boolValue : boolean;
-}
+
+
 
 
 @Injectable()
-export class GlobalProvider
-{
-    loggedIn : boolean;
-    dataChange : Observable<any>;
-    dataChangeObserver : Observer<any>;
+export class GlobalProvider {
 
-    UserTeam        : Team;
-    UserTeamCopy    : Team;
-    UserPlayers     : Player[];
-    UserPlayersCopy : Player[];
+  isLoggedIn : boolean = false;
+  userTeam : Team;
+  userPlayers : Player[];
 
-    CanUpdateTeam   : RefObject;      //ali je mozno v transfer komponenti kliknit na gumb za posodobitev ekipe
+  public selectedTeam : Team;
 
-    selectedUser : UserFull;
 
-    constructor()
-    {
-        this.dataChange = new Observable((observer : Observer<any>) =>
-        {
-            this.dataChangeObserver = observer;
-        });
+  constructor(public http: Http, private storage: Storage) {
+    console.log('Hello GlobalProvider Provider');
+    //
+    this.userTeam = new Team();
+    this.userPlayers = new Player()[1];
 
-        this.CanUpdateTeam = new RefObject();
-        this.CanUpdateTeam.boolValue = false;
+    this.selectedTeam = new Team();
+    this.selectedTeam.name = "";
+  }
+
+
+
+  login(user : User) : Observable<APIresponse>
+  {
+          return this.http.post('http://localhost:8080/user/login', user, { headers: this.getHeaders(), withCredentials: true })
+                      .map((response : Response) =>
+                      {
+                          var res = response.json();                              //server poslje response
+                          if(res.Token != null)                                   //ce response vsebuje Token, je uporabnik avtenticiran
+                              //localStorage.setItem("currentUser", res.Token);     //ter v localStorage zapisemo da je uporabnik prijavljen
+                              this.storage.set('currentUser', res.Token);
+                          console.log(res.Status);                                //TEST - zapis v konzoli
+                          console.log(res);
+                          return res;
+                      });
+  }
+
+
+  fetchTeams(requestInfo : any) : Observable<Team[]>
+  {
+            return this.http.post('http://localhost:8080/fantasy/teams', requestInfo, { headers : this.getHeaders(), withCredentials : true})
+                            .map((response : Response) =>
+                            {
+                                var res = response.json();
+                                console.log(res);
+                                if(res.length == 0)
+                                    res = null;
+
+                                return res;
+                            })
     }
 
-
-    //funkcija ki jo klicemo v drugih komponentah - ko hocemo spremeniti vrednost loggedIn
-    updateLoggedIn(data : boolean)
+    fetchPlayers(requestInfo : Team) : Observable<Player[]> //starting
     {
-        this.loggedIn = data;
-        this.dataChangeObserver.next(this.loggedIn);
+      return this.http.post('http://localhost:8080/showteam/starting', requestInfo, { headers : this.getHeaders(), withCredentials : true})
+                      .map((response : Response) =>
+                      {
+                          var res = response.json();
+                          //console.log(res);
+                          if(res.length == 0)
+                              res = null;
+
+                          return res; //mhm
+                      })
     }
 
+    countTodayMatches(teamID : number) : Observable<any>
+  {
+      return this.http.post('http://localhost:8080/showteam/matchCount', { TeamID : teamID }, { headers : this.getHeaders(), withCredentials : true})
+                        .map((response : Response) =>
+                        {
+                            var res = response.json();
+                            console.log(res);
+                            return res;
+                        })
+  }
 
-    //funkcija ki jo klicemo v drugih komponentah - ko hocemo spremeniti vrednosti uporabnikove ekipe
-    updateUserTeam(data : Team)
-    {
-        this.UserTeam = data;
-        this.dataChangeObserver.next(this.UserTeam);
-    }
+  simulate(requestInfo) : Observable<any>
+  {
+      console.log("TEST");
+      return this.http.post('http://localhost:8080/fantasy/simulateFixture', requestInfo, { headers : this.getHeaders(), withCredentials : true})
+                      .map((response : Response) =>
+                      {
+                          var res = response.json();
+                          console.log(res);
+                          return res;
+                      })
 
-
-    //funkcija ki jo klicemo v drugih komponentah - ko ko spreminjamo seznam igralcev v uporabnikovi ekipi
-    updateUserPlayers(data : Player[])
-    {
-        this.UserPlayers = data;
-        this.dataChangeObserver.next(this.UserPlayers);
-    }
-
-
-    //za kreiranje kopije dobljenih igralcev iz apija
-    createPlayersCopy(data : Player[])
-    {
-        this.UserPlayersCopy = [];
-        for(var i = 0; i < data.length; i++)
-            this.UserPlayersCopy.push(data[i]);
-    }
-
-
-    //skopiramo ekipo, rabimo to funkcijo, drugace se kopira referenca in ne vrednost
-    createTeamCopy(team : Team)
-    {
-        this.UserTeamCopy               = new Team();
-        this.UserTeamCopy.ID            = team.ID;
-        this.UserTeamCopy.ID_user       = team.ID_user;
-        this.UserTeamCopy.name          = team.name;
-        this.UserTeamCopy.budget        = team.budget;
-        this.UserTeamCopy.value         = team.value;
-        this.UserTeamCopy.transfers     = team.transfers;
-        this.UserTeamCopy.formation     = team.formation;
-        this.UserTeamCopy.is_playable   = team.is_playable;
-        this.UserTeamCopy.gks           = team.gks;
-        this.UserTeamCopy.defs          = team.defs;
-        this.UserTeamCopy.mids          = team.mids;
-        this.UserTeamCopy.fwds          = team.fwds;
-        this.UserTeamCopy.wins          = team.wins;
-        this.UserTeamCopy.draws         = team.draws;
-        this.UserTeamCopy.losses        = team.losses;
-        this.UserTeamCopy.points        = team.points;
-        this.UserTeamCopy.goals_for     = team.goals_for;
-        this.UserTeamCopy.goals_against = team.goals_against;
-    }
+  }
 
 
-    resetChanges()
-    {
-        //this.UserPlayers = this.UserPlayersCopy;
-        this.UserPlayers = JSON.parse(JSON.stringify(this.UserPlayersCopy));    // <- IZOGNEMO SE KOPIRANJU REFERENC! "cheat" da skopiramo polje objekotv po vrednosti
-        this.UserTeam = JSON.parse(JSON.stringify(this.UserTeamCopy));
-        this.CanUpdateTeam.boolValue = false;
-        console.log(this.UserTeam);
-    }
 
 
-    //preverjanje ali je mozno posodobit ekipo, po uporabnikovih spremembah
-    checkIfCanUpdate()
-    {
-        if(this.UserPlayers.length == 15 && this.UserTeam.gks == 2 && this.UserTeam.defs == 5 && this.UserTeam.mids == 5 && this.UserTeam.fwds == 3 &&
-            this.UserTeam.budget >= 0 && this.UserTeam.value <= 350 && this.UserTeam.transfers >= 0)
-            this.CanUpdateTeam.boolValue = true;
-        else
-            this.CanUpdateTeam.boolValue = false;
-    }
+      private getHeaders()
+          {
+              var headers = new Headers();
+              headers.append('Accept', 'application/json');
+              return headers;
+          }
+
+
+
 }

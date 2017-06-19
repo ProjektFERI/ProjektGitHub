@@ -1,5 +1,5 @@
-import { Player }			from '../_models/player';
-import { Team }			from '../_models/team';
+import { Team }     from './team';
+import { Player }   from './player';
 
 export class APIresponse
 {

@@ -1,30 +1,20 @@
 <ion-header>
-  <ion-navbar color="svetloGreen">
+  <ion-navbar color=green>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="ozadje">
-  <ion-card>
+<ion-content padding>
+  <h3>Offsite</h3>
 
-    <ion-card-header>
-      Fantasy League
-    </ion-card-header>
+  <p>
+    Offsite home.
+  </p>
 
-    <ion-list>
-      <button ion-item (click)="ligaShow()">
-        <ion-icon name="globe" item-left></ion-icon>
-        My League
-      </button>
-      <button ion-item (click)="statShow()">
-        <ion-icon name="clipboard" item-left></ion-icon>
-        Statistics
-      </button>
-      <button ion-item (click)="helpShow()">
-        <ion-icon name="information-circle" item-left></ion-icon>
-        Help
-      </button>
-    </ion-list>
-  </ion-card>
+
+<!--  <button ion-button secondary menuToggle>Toggle Menu</button> -->
 
 </ion-content>

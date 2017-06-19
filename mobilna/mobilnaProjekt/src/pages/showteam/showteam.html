@@ -1,0 +1,56 @@
+<!--
+  Generated template for the ShowteamPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color=green>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{userTeam.name}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list no-lines>
+
+    <ion-item>
+      <div item-left ><b>Team:</b></div>
+      <div >{{userTeam.name}}</div>
+    </ion-item>
+    <ion-item>
+      <div item-left ><b>Value:</b></div>
+      <div >{{userTeam.value}}</div>
+    </ion-item>
+    <ion-item>
+      <div item-left ><b>Record:</b></div>
+      <div >{{userTeam.wins}}W {{userTeam.draws}}D {{userTeam.losses}}L</div>
+    </ion-item>
+    <ion-item>
+      <div item-left ><b>Points:</b></div>
+      <div >{{userTeam.points}}</div>
+    </ion-item>
+    <ion-item>
+      <div item-left ><b>Goals:</b></div>
+      <div >{{userTeam.goals_for}}/{{userTeam.goals_against}}</div>
+    </ion-item>
+    <button ion-item color="green" style="text-align:center" [disabled]="!CanPlay" (click)="play()">
+      <div >PLAY</div>
+    </button>
+    <ion-item>
+      <div item-left ><b>Players:</b></div>
+    </ion-item>
+    <button ion-item *ngFor="let player of userPlayers; let i = index" color="light" style="margin:5px 0px 5px 0px" (click)="playerDetails(player)">
+      <img item-left src={{player.photo}} style="border: 2px grey solid; border-radius:90px; height:60px; width:60px;" >
+      <span>{{player.name}}</span>
+      <span item-right>{{player.overall}}</span>
+    </button>
+
+
+  </ion-list>
+
+</ion-content>

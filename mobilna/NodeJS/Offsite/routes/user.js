@@ -16,8 +16,7 @@ router.post('/login', function(request, response)
     console.log("--LOGIN--");
     var username = request.body.username;                                                           //iz poslanega requesta poberemo username in geslo
     var password = request.body.password;
-    console.log(username);
-    console.log(password);
+
     var queryString = "SELECT * FROM user WHERE username = " + mysql.escape(username);              //precistimo input
     databaseConnection.query(queryString, function(error, result)
     {

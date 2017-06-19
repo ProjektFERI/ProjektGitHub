@@ -1,10 +1,14 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { Component } 			from '@angular/core';
+import { IonicPage,
+		NavParams,
+		ViewController,
+		ModalController } 		from 'ionic-angular';
+
+import { TeamDetailsProvider } 	from '../../providers/team-details/team-details';
 
 import { Team }					from '../../_models/team';
 import { Player }				from '../../_models/player';
 
-import { TeamDetailsProvider } 	from '../../providers/team-details/team-details';
 import { PlayerDetailsPage }		from '../player-details/player-details';
 
 @IonicPage()

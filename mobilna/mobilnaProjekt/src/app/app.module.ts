@@ -1,73 +1,80 @@
-import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { MyApp } from './app.component';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
-import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
-import { LogInPage } from '../pages/log-in/log-in';
-import { HelpPage } from '../pages/help/help';
-import { LeaguePage } from '../pages/league/league';
-import { StatisticsPage } from '../pages/statistics/statistics';
-import { PlayerDetailsPage } from '../pages/player-details/player-details';
-import { TeamDetailsPage } from '../pages/team-details/team-details';
-import { NewsPage } from '../pages/news/news';
-import { NewsEnaPage } from '../pages/news-ena/news-ena';
-
-
-import { HttpModule } from '@angular/http';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { UserProvider } from '../providers/user/user';
+
+//my modules
+import { HttpModule } from '@angular/http';
+import { IonicStorageModule } from '@ionic/storage';
+import { SMS } from '@ionic-native/sms';
+
+//pages
+import { MyApp } from './app.component';
+import { HomePage } from '../pages/home/home';
+import { ListPage } from '../pages/list/list';
+import { LeaguePage } from '../pages/league/league';
+import { TeamPage } from '../pages/team/team';
+import { LoginPage } from '../pages/login/login';
+import { MenuPage } from '../pages/menu/menu';
+import { ShowteamPage } from '../pages/showteam/showteam';
+import { InvitePage } from '../pages/invite/invite';
+
+//services
 import { GlobalProvider } from '../providers/global/global';
+
+
+import { StatisticsPage } from '../pages/statistics/statistics';
+import { TeamDetailsPage } from '../pages/team-details/team-details';
+import { PlayerDetailsPage } from '../pages/player-details/player-details';
+
 import { StatisticsProvider } from '../providers/statistics/statistics';
 import { TeamDetailsProvider } from '../providers/team-details/team-details';
-import { LeagueProvider } from '../providers/league/league';
-import { NewsProvider } from '../providers/news/news';
+
+
 
 @NgModule({
-  declarations: [
+  declarations: [ //add pages?
     MyApp,
     HomePage,
-    TabsPage,
-    LogInPage,
-    HelpPage,
     LeaguePage,
-    StatisticsPage,
-    PlayerDetailsPage,
-    TeamDetailsPage,
-    NewsPage,
-    NewsEnaPage
+    TeamPage,
+    LoginPage,
+    ListPage,
+    MenuPage,
+    ShowteamPage,
+    InvitePage,
+    StatisticsPage, TeamDetailsPage, PlayerDetailsPage
   ],
-  imports: [
+  imports: [ //add modules?
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpModule
+    //add
+    IonicStorageModule.forRoot(), //storage
+    HttpModule //http
   ],
   bootstrap: [IonicApp],
-  entryComponents: [
+  entryComponents: [ //add pages?
     MyApp,
     HomePage,
-    TabsPage,
-    LogInPage,
-    HelpPage,
     LeaguePage,
-    StatisticsPage,
-    PlayerDetailsPage,
-    TeamDetailsPage,
-    NewsPage,
-    NewsEnaPage
+    TeamPage,
+    LoginPage,
+    ListPage,
+    MenuPage,
+    ShowteamPage,
+    InvitePage,
+    StatisticsPage, TeamDetailsPage, PlayerDetailsPage
   ],
-  providers: [
+  providers: [ //add services?
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UserProvider,
+    //add
     GlobalProvider,
-    StatisticsProvider,
-    TeamDetailsProvider,
-    LeagueProvider,
-    NewsProvider
+    SMS,
+    StatisticsProvider, TeamDetailsProvider
   ]
 })
 export class AppModule {}

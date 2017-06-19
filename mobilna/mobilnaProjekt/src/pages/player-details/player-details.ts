@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavParams, ViewController } from 'ionic-angular';
+import { Component } 		from '@angular/core';
+import { IonicPage,
+		NavParams,
+		ViewController } 	from 'ionic-angular';
 
 import { Player }			from '../../_models/player';
 
@@ -14,12 +16,12 @@ export class PlayerDetailsPage
 
   	constructor(private navParams: NavParams, private viewController : ViewController)
   	{
-		    this.SelectedPlayer = navParams.get("pPlayer");
+		this.SelectedPlayer = navParams.get("pPlayer");
   	}
 
   	ionViewDidLoad()
   	{
-
+	  	
   	}
 
 

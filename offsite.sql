@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1
+-- version 4.2.7.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 04, 2017 at 09:42 PM
--- Server version: 5.7.11
--- PHP Version: 5.6.18
+-- Generation Time: Jun 16, 2017 at 09:14 PM
+-- Server version: 5.6.20-log
+-- PHP Version: 5.4.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `offsite`
@@ -26,14 +26,14 @@ SET time_zone = "+00:00";
 -- Table structure for table `fixture`
 --
 
-CREATE TABLE `fixture` (
-  `ID` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fixture` (
+`ID` int(11) unsigned NOT NULL,
   `ID_team1` int(11) NOT NULL,
   `ID_team2` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `goals_team1` int(2) DEFAULT NULL,
   `goals_team2` int(2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=196 ;
 
 --
 -- Dumping data for table `fixture`
@@ -66,7 +66,35 @@ INSERT INTO `fixture` (`ID`, `ID_team1`, `ID_team2`, `date`, `goals_team1`, `goa
 (146, 21, 25, '2017-06-04 21:38:14', 1, 1),
 (147, 22, 25, '2017-06-04 21:38:18', 0, 3),
 (148, 24, 25, '2017-06-04 21:38:23', 1, 3),
-(149, 23, 25, '2017-06-04 21:38:30', 0, 2);
+(149, 23, 25, '2017-06-04 21:38:30', 0, 2),
+(150, 20, 26, '2017-06-04 21:58:02', 2, 2),
+(151, 20, 26, '2017-06-04 21:58:24', 0, 0),
+(152, 25, 26, '2017-06-04 21:58:30', 0, 3),
+(153, 25, 26, '2017-06-04 21:58:34', 1, 1),
+(154, 25, 26, '2017-06-04 21:58:36', 0, 1),
+(155, 25, 26, '2017-06-04 21:58:38', 1, 3),
+(156, 25, 26, '2017-06-04 21:58:40', 0, 3),
+(157, 25, 26, '2017-06-04 22:23:37', 0, 3),
+(158, 24, 26, '2017-06-05 08:21:08', 0, 0),
+(159, 24, 26, '2017-06-05 08:21:12', 0, 2),
+(160, 24, 26, '2017-06-05 08:21:15', 3, 3),
+(161, 24, 26, '2017-06-05 08:21:17', 2, 4),
+(162, 24, 26, '2017-06-05 08:21:25', 0, 0),
+(163, 26, 27, '2017-06-05 08:31:21', 1, 4),
+(164, 26, 27, '2017-06-05 08:31:39', 0, 3),
+(165, 26, 27, '2017-06-05 08:31:41', 0, 0),
+(166, 26, 27, '2017-06-05 08:31:44', 1, 4),
+(167, 26, 27, '2017-06-05 08:31:47', 0, 5),
+(168, 26, 27, '2017-06-05 08:31:49', 0, 3),
+(169, 26, 27, '2017-06-05 08:31:58', 0, 3),
+(170, 26, 27, '2017-06-05 08:32:42', 1, 4),
+(171, 26, 27, '2017-06-05 08:32:45', 2, 4),
+(172, 21, 26, '2017-06-10 15:47:59', 2, 3),
+(191, 25, 21, '2017-06-12 16:16:36', 0, 3),
+(192, 25, 21, '2017-06-12 16:16:39', 1, 3),
+(193, 25, 21, '2017-06-12 16:16:40', 1, 1),
+(194, 25, 21, '2017-06-12 16:16:42', 0, 3),
+(195, 25, 21, '2017-06-12 16:16:43', 0, 2);
 
 -- --------------------------------------------------------
 
@@ -74,10 +102,10 @@ INSERT INTO `fixture` (`ID`, `ID_team1`, `ID_team2`, `date`, `goals_team1`, `goa
 -- Table structure for table `league`
 --
 
-CREATE TABLE `league` (
-  `ID` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `league` (
+`ID` int(11) unsigned NOT NULL,
   `name` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `league`
@@ -93,11 +121,11 @@ INSERT INTO `league` (`ID`, `name`) VALUES
 -- Table structure for table `league_fixture`
 --
 
-CREATE TABLE `league_fixture` (
-  `ID` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `league_fixture` (
+`ID` int(11) NOT NULL,
   `ID_league` int(11) NOT NULL,
   `ID_fixture` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -105,11 +133,11 @@ CREATE TABLE `league_fixture` (
 -- Table structure for table `league_user`
 --
 
-CREATE TABLE `league_user` (
-  `ID` int(11) NOT NULL,
-  `ID_league` int(11) UNSIGNED NOT NULL,
-  `ID_user` int(11) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `league_user` (
+`ID` int(11) NOT NULL,
+  `ID_league` int(11) unsigned NOT NULL,
+  `ID_user` int(11) unsigned NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `league_user`
@@ -131,8 +159,8 @@ INSERT INTO `league_user` (`ID`, `ID_league`, `ID_user`) VALUES
 -- Table structure for table `player`
 --
 
-CREATE TABLE `player` (
-  `ID` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `player` (
+`ID` int(10) unsigned NOT NULL,
   `name` varchar(100) NOT NULL,
   `position` enum('GK','DEF','MID','FWD') NOT NULL,
   `club` varchar(75) NOT NULL,
@@ -174,7 +202,7 @@ CREATE TABLE `player` (
   `GK_kicking` int(3) NOT NULL,
   `GK_positioning` int(3) NOT NULL,
   `GK_reflexes` int(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=661 ;
 
 --
 -- Dumping data for table `player`
@@ -351,7 +379,7 @@ INSERT INTO `player` (`ID`, `name`, `position`, `club`, `photo`, `overall`, `val
 (169, 'Thibaut Courtois', 'GK', 'Chelsea', 'https://cdn.sofifa.org/17/players/192119.png', 89, 65.5, 1, 14, 14, 13, 32, 12, 13, 19, 11, 31, 23, 46, 52, 61, 81, 45, 36, 68, 38, 70, 17, 23, 15, 13, 44, 27, 52, 11, 18, 16, 84, 91, 69, 86, 89),
 (170, 'David Luiz Moreira Marinho', 'DEF', 'Chelsea', 'https://cdn.sofifa.org/17/players/179944.png', 84, 22, 3, 68, 56, 82, 79, 67, 66, 70, 76, 78, 79, 72, 73, 74, 79, 56, 77, 82, 77, 77, 71, 84, 82, 54, 69, 75, 74, 80, 85, 84, 11, 12, 10, 7, 14),
 (171, 'Marcos Alonso Mendoza', 'DEF', 'Chelsea', 'https://cdn.sofifa.org/17/players/192638.png', 79, 10.5, 3, 78, 62, 70, 75, 52, 78, 65, 73, 72, 78, 76, 82, 69, 82, 58, 77, 68, 90, 78, 75, 70, 70, 70, 65, 64, 72, 74, 77, 76, 9, 7, 13, 9, 12),
-(172, 'N\'Golo Kanté', 'MID', 'Chelsea', 'https://cdn.sofifa.org/17/players/215914.png', 83, 28.5, 3, 67, 65, 54, 84, 56, 76, 49, 49, 79, 79, 83, 81, 80, 85, 90, 72, 79, 94, 76, 66, 90, 91, 69, 76, 54, 84, 75, 89, 85, 15, 12, 10, 7, 10),
+(172, 'N''Golo Kanté', 'MID', 'Chelsea', 'https://cdn.sofifa.org/17/players/215914.png', 83, 28.5, 3, 67, 65, 54, 84, 56, 76, 49, 49, 79, 79, 83, 81, 80, 85, 90, 72, 79, 94, 76, 66, 90, 91, 69, 76, 54, 84, 75, 89, 85, 15, 12, 10, 7, 10),
 (173, 'Nemanja Matić', 'MID', 'Chelsea', 'https://cdn.sofifa.org/17/players/191202.png', 84, 24, 3, 68, 64, 77, 83, 74, 72, 68, 67, 80, 79, 66, 68, 57, 82, 53, 78, 71, 90, 90, 75, 83, 86, 68, 77, 69, 85, 76, 83, 77, 7, 15, 12, 14, 9),
 (174, 'Gary Cahill', 'DEF', 'Chelsea', 'https://cdn.sofifa.org/17/players/164468.png', 83, 17, 2, 28, 56, 86, 65, 47, 58, 48, 27, 61, 63, 69, 66, 62, 84, 51, 63, 82, 68, 78, 66, 78, 83, 45, 56, 53, 77, 83, 85, 84, 5, 12, 9, 5, 12),
 (175, 'Pedro Rodríguez Ledesma', 'FWD', 'Chelsea', 'https://cdn.sofifa.org/17/players/189505.png', 83, 23, 4, 78, 81, 55, 83, 70, 84, 81, 57, 70, 85, 86, 80, 84, 83, 82, 71, 67, 80, 56, 73, 56, 49, 84, 74, 66, 72, 30, 32, 31, 5, 11, 12, 15, 9),
@@ -386,9 +414,9 @@ INSERT INTO `player` (`ID`, `name`, `position`, `club`, `photo`, `overall`, `val
 (204, 'Fraser Forster', 'GK', 'Southampton', 'https://cdn.sofifa.org/17/players/172203.png', 78, 8, 1, 19, 13, 13, 27, 19, 20, 10, 19, 19, 33, 32, 35, 32, 70, 42, 36, 59, 29, 80, 12, 43, 22, 13, 44, 22, 34, 13, 13, 12, 74, 80, 69, 78, 83),
 (205, 'Ryan Bertrand', 'DEF', 'Southampton', 'https://cdn.sofifa.org/17/players/169705.png', 80, 13.5, 2, 79, 41, 69, 76, 43, 75, 74, 66, 70, 77, 81, 79, 76, 76, 68, 59, 71, 83, 72, 54, 73, 77, 63, 51, 52, 76, 79, 82, 82, 11, 13, 15, 10, 15),
 (206, 'Manolo Gabbiadini', 'FWD', 'Southampton', 'https://cdn.sofifa.org/17/players/198683.png', 80, 19, 3, 70, 81, 73, 74, 73, 80, 78, 82, 64, 84, 79, 79, 74, 75, 56, 87, 76, 69, 76, 89, 57, 18, 78, 72, 72, 71, 18, 24, 20, 12, 11, 11, 5, 5),
-(207, 'James Ward-Prowse', 'MID', 'Southampton', 'https://cdn.sofifa.org/17/players/205569.png', 76, 7.5, 3, 88, 53, 57, 81, 51, 71, 86, 79, 80, 78, 69, 68, 74, 73, 79, 74, 68, 76, 64, 70, 67, 65, 61, 82, 64, 79, 55, 65, 62, 12, 12, 10, 15, 15),
-(208, 'Steven Davis', 'MID', 'Southampton', 'https://cdn.sofifa.org/17/players/151508.png', 77, 5.5, 3, 75, 58, 53, 80, 64, 76, 73, 69, 77, 77, 67, 67, 79, 80, 76, 63, 82, 86, 67, 63, 74, 67, 68, 75, 62, 84, 66, 71, 67, 9, 7, 13, 9, 11);
+(207, 'James Ward-Prowse', 'MID', 'Southampton', 'https://cdn.sofifa.org/17/players/205569.png', 76, 7.5, 3, 88, 53, 57, 81, 51, 71, 86, 79, 80, 78, 69, 68, 74, 73, 79, 74, 68, 76, 64, 70, 67, 65, 61, 82, 64, 79, 55, 65, 62, 12, 12, 10, 15, 15);
 INSERT INTO `player` (`ID`, `name`, `position`, `club`, `photo`, `overall`, `value`, `skills`, `crossing`, `finishing`, `heading`, `short_passing`, `volleys`, `dribbling`, `curve`, `free_kicks`, `long_passing`, `ball_controll`, `acceleration`, `sprint_speed`, `agility`, `reactions`, `balance`, `shot_power`, `jumping`, `stamina`, `strength`, `long_shots`, `aggression`, `interceptions`, `positioning`, `vision`, `penalties`, `composure`, `marking`, `stand_tackle`, `slide_tackle`, `GK_diving`, `GK_handling`, `GK_kicking`, `GK_positioning`, `GK_reflexes`) VALUES
+(208, 'Steven Davis', 'MID', 'Southampton', 'https://cdn.sofifa.org/17/players/151508.png', 77, 5.5, 3, 75, 58, 53, 80, 64, 76, 73, 69, 77, 77, 67, 67, 79, 80, 76, 63, 82, 86, 67, 63, 74, 67, 68, 75, 62, 84, 66, 71, 67, 9, 7, 13, 9, 11),
 (209, 'Dušan Tadić', 'MID', 'Southampton', 'https://cdn.sofifa.org/17/players/199434.png', 80, 14.5, 4, 79, 65, 63, 81, 73, 83, 83, 76, 77, 85, 72, 70, 81, 80, 80, 69, 65, 73, 64, 66, 56, 31, 73, 84, 78, 79, 40, 34, 26, 11, 11, 14, 9, 16),
 (210, 'Nathan Redmond', 'MID', 'Southampton', 'https://cdn.sofifa.org/17/players/198719.png', 75, 6, 4, 71, 68, 33, 69, 55, 79, 69, 65, 63, 77, 89, 86, 90, 63, 84, 71, 48, 72, 45, 71, 38, 22, 71, 72, 60, 62, 18, 26, 30, 12, 14, 16, 6, 10),
 (211, 'Shane Long', 'FWD', 'Southampton', 'https://cdn.sofifa.org/17/players/169216.png', 76, 5, 3, 70, 73, 75, 62, 70, 73, 54, 37, 49, 75, 84, 84, 74, 77, 73, 76, 93, 84, 79, 67, 80, 42, 77, 63, 78, 70, 36, 27, 24, 11, 13, 10, 11, 10),
@@ -513,7 +541,7 @@ INSERT INTO `player` (`ID`, `name`, `position`, `club`, `photo`, `overall`, `val
 (330, 'Daniel Iversen', 'GK', 'Leicester City', 'https://cdn.sofifa.org/17/players/228410.png', 58, 0.23, 1, 17, 14, 16, 27, 20, 11, 16, 11, 21, 16, 40, 44, 32, 50, 48, 23, 59, 44, 67, 15, 19, 20, 19, 33, 21, 28, 20, 18, 13, 64, 55, 62, 50, 60),
 (331, 'Jordan Pickford', 'GK', 'Sunderland', 'https://cdn.sofifa.org/17/players/204935.png', 76, 7.5, 1, 17, 19, 15, 28, 20, 14, 18, 16, 33, 21, 48, 41, 33, 68, 67, 31, 59, 44, 50, 13, 23, 24, 18, 66, 41, 27, 14, 20, 12, 74, 76, 85, 73, 78),
 (332, 'Matty Miles', 'MID', 'Leicester City', 'https://cdn.sofifa.org/17/players/235321.png', 53, 0.09, 2, 53, 45, 48, 53, 35, 51, 43, 35, 46, 50, 65, 63, 58, 56, 62, 39, 57, 56, 52, 34, 57, 54, 49, 43, 44, 41, 48, 53, 48, 13, 13, 14, 8, 7),
-(333, 'John O\'Shea', 'DEF', 'Sunderland', 'https://cdn.sofifa.org/17/players/3484.png', 74, 0.575, 2, 53, 29, 77, 61, 32, 46, 51, 35, 57, 64, 34, 32, 49, 71, 54, 49, 61, 34, 77, 23, 75, 76, 32, 55, 47, 69, 76, 78, 73, 9, 14, 13, 10, 14),
+(333, 'John O''Shea', 'DEF', 'Sunderland', 'https://cdn.sofifa.org/17/players/3484.png', 74, 0.575, 2, 53, 29, 77, 61, 32, 46, 51, 35, 57, 64, 34, 32, 49, 71, 54, 49, 61, 34, 77, 23, 75, 76, 32, 55, 47, 69, 76, 78, 73, 9, 14, 13, 10, 14),
 (334, 'Bryan Oviedo', 'DEF', 'Sunderland', 'https://cdn.sofifa.org/17/players/198335.png', 72, 2, 3, 72, 61, 48, 68, 58, 75, 59, 63, 64, 73, 79, 73, 79, 72, 79, 66, 82, 79, 58, 59, 72, 69, 66, 66, 56, 69, 73, 72, 70, 11, 12, 8, 10, 16),
 (335, 'Billy Jones', 'DEF', 'Sunderland', 'https://cdn.sofifa.org/17/players/138722.png', 71, 1.2, 2, 54, 53, 61, 68, 45, 70, 58, 59, 66, 67, 66, 67, 69, 70, 68, 59, 72, 81, 71, 60, 68, 75, 44, 51, 57, 61, 69, 77, 76, 6, 11, 14, 12, 15),
 (336, 'Didier Ndong', 'MID', 'Sunderland', 'https://cdn.sofifa.org/17/players/218359.png', 74, 4.7, 2, 47, 54, 67, 77, 53, 70, 50, 42, 76, 75, 71, 69, 69, 70, 75, 74, 60, 76, 75, 62, 90, 75, 68, 69, 51, 68, 74, 77, 72, 10, 13, 16, 7, 15),
@@ -590,11 +618,11 @@ INSERT INTO `player` (`ID`, `name`, `position`, `club`, `photo`, `overall`, `val
 (407, 'Abdoulaye Doucouré', 'MID', 'Watford', 'https://cdn.sofifa.org/17/players/208135.png', 77, 8.5, 2, 68, 70, 66, 79, 67, 75, 41, 42, 74, 78, 65, 76, 60, 70, 64, 75, 71, 83, 80, 74, 75, 78, 73, 75, 45, 70, 69, 77, 71, 15, 12, 12, 15, 14),
 (408, 'Nordin Amrabat', 'MID', 'Watford', 'https://cdn.sofifa.org/17/players/183108.png', 80, 13, 4, 78, 76, 68, 79, 73, 84, 77, 68, 67, 80, 87, 85, 88, 73, 79, 81, 56, 73, 77, 72, 67, 54, 73, 78, 77, 67, 45, 65, 55, 11, 14, 7, 6, 13),
 (409, 'Isaac Success', 'FWD', 'Watford', 'https://cdn.sofifa.org/17/players/222634.png', 74, 5.5, 3, 73, 69, 64, 68, 55, 77, 56, 54, 55, 79, 85, 89, 78, 68, 57, 80, 82, 65, 83, 58, 45, 20, 72, 61, 68, 46, 22, 33, 24, 8, 15, 14, 8, 10),
-(410, 'M\'Baye Niang', 'FWD', 'Watford', 'https://cdn.sofifa.org/17/players/204077.png', 78, 12, 4, 67, 70, 64, 72, 72, 84, 68, 66, 57, 82, 85, 92, 85, 70, 69, 86, 69, 75, 73, 74, 50, 30, 82, 75, 70, 68, 16, 24, 20, 4, 6, 4, 4, 4),
-(411, 'Daryl Janmaat', 'DEF', 'Watford', 'https://cdn.sofifa.org/17/players/188155.png', 77, 6.5, 3, 73, 55, 70, 70, 67, 74, 64, 56, 68, 76, 74, 75, 72, 79, 66, 76, 71, 92, 75, 64, 84, 73, 68, 70, 62, 66, 74, 77, 75, 15, 10, 7, 11, 7),
-(412, 'Stefano Okaka', 'FWD', 'Watford', 'https://cdn.sofifa.org/17/players/178091.png', 77, 8, 2, 50, 74, 80, 71, 67, 75, 58, 48, 29, 75, 73, 78, 58, 71, 48, 81, 76, 79, 93, 69, 73, 21, 78, 62, 68, 71, 15, 25, 20, 7, 7, 7, 5, 8),
-(413, 'Costel Pantilimon', 'GK', 'Watford', 'https://cdn.sofifa.org/17/players/192613.png', 77, 6, 1, 19, 11, 16, 38, 13, 15, 15, 12, 36, 22, 48, 42, 33, 69, 22, 14, 34, 31, 78, 15, 40, 27, 12, 38, 21, 65, 14, 19, 17, 74, 77, 68, 79, 78);
+(410, 'M''Baye Niang', 'FWD', 'Watford', 'https://cdn.sofifa.org/17/players/204077.png', 78, 12, 4, 67, 70, 64, 72, 72, 84, 68, 66, 57, 82, 85, 92, 85, 70, 69, 86, 69, 75, 73, 74, 50, 30, 82, 75, 70, 68, 16, 24, 20, 4, 6, 4, 4, 4),
+(411, 'Daryl Janmaat', 'DEF', 'Watford', 'https://cdn.sofifa.org/17/players/188155.png', 77, 6.5, 3, 73, 55, 70, 70, 67, 74, 64, 56, 68, 76, 74, 75, 72, 79, 66, 76, 71, 92, 75, 64, 84, 73, 68, 70, 62, 66, 74, 77, 75, 15, 10, 7, 11, 7);
 INSERT INTO `player` (`ID`, `name`, `position`, `club`, `photo`, `overall`, `value`, `skills`, `crossing`, `finishing`, `heading`, `short_passing`, `volleys`, `dribbling`, `curve`, `free_kicks`, `long_passing`, `ball_controll`, `acceleration`, `sprint_speed`, `agility`, `reactions`, `balance`, `shot_power`, `jumping`, `stamina`, `strength`, `long_shots`, `aggression`, `interceptions`, `positioning`, `vision`, `penalties`, `composure`, `marking`, `stand_tackle`, `slide_tackle`, `GK_diving`, `GK_handling`, `GK_kicking`, `GK_positioning`, `GK_reflexes`) VALUES
+(412, 'Stefano Okaka', 'FWD', 'Watford', 'https://cdn.sofifa.org/17/players/178091.png', 77, 8, 2, 50, 74, 80, 71, 67, 75, 58, 48, 29, 75, 73, 78, 58, 71, 48, 81, 76, 79, 93, 69, 73, 21, 78, 62, 68, 71, 15, 25, 20, 7, 7, 7, 5, 8),
+(413, 'Costel Pantilimon', 'GK', 'Watford', 'https://cdn.sofifa.org/17/players/192613.png', 77, 6, 1, 19, 11, 16, 38, 13, 15, 15, 12, 36, 22, 48, 42, 33, 69, 22, 14, 34, 31, 78, 15, 40, 27, 12, 38, 21, 65, 14, 19, 17, 74, 77, 68, 79, 78),
 (414, 'Younès Kaboul', 'DEF', 'Watford', 'https://cdn.sofifa.org/17/players/163418.png', 76, 3.8, 2, 56, 21, 81, 67, 34, 52, 44, 37, 54, 59, 52, 70, 53, 66, 47, 82, 78, 69, 83, 56, 84, 74, 51, 51, 54, 66, 72, 77, 74, 9, 14, 7, 9, 6),
 (415, 'Mauro Zárate', 'FWD', 'Watford', 'https://cdn.sofifa.org/17/players/153177.png', 77, 7, 4, 66, 78, 56, 72, 78, 86, 81, 79, 60, 87, 82, 78, 86, 75, 74, 80, 69, 69, 62, 82, 66, 38, 78, 63, 70, 72, 22, 34, 30, 7, 16, 16, 6, 12),
 (416, 'Roberto Pereyra', 'MID', 'Watford', 'https://cdn.sofifa.org/17/players/193061.png', 81, 20.5, 4, 78, 61, 60, 83, 74, 84, 78, 72, 77, 85, 81, 81, 82, 76, 75, 66, 65, 83, 64, 72, 66, 70, 80, 82, 72, 78, 64, 70, 70, 4, 5, 3, 4, 8),
@@ -640,7 +668,7 @@ INSERT INTO `player` (`ID`, `name`, `position`, `club`, `photo`, `overall`, `val
 (456, 'Zachary Elbouzedi', 'MID', 'West Bromwich Albion', 'https://cdn.sofifa.org/17/players/230847.png', 62, 0.475, 3, 50, 54, 41, 63, 50, 71, 57, 52, 63, 68, 55, 69, 55, 58, 68, 65, 56, 49, 48, 50, 42, 29, 44, 62, 60, 63, 48, 35, 41, 6, 11, 13, 10, 7),
 (457, 'Callam Jones', 'DEF', 'West Bromwich Albion', 'https://cdn.sofifa.org/17/players/215371.png', 61, 0.325, 2, 40, 32, 60, 50, 36, 29, 34, 32, 41, 46, 66, 67, 60, 52, 60, 44, 71, 67, 74, 21, 55, 61, 28, 39, 41, 51, 56, 63, 62, 13, 10, 15, 15, 6),
 (458, 'Andre Wright', 'FWD', 'West Bromwich Albion', 'https://cdn.sofifa.org/17/players/230895.png', 63, 0.55, 3, 36, 68, 51, 59, 56, 70, 61, 41, 47, 60, 78, 78, 52, 58, 62, 71, 58, 54, 67, 58, 37, 21, 44, 62, 71, 55, 23, 23, 21, 12, 9, 14, 5, 6),
-(459, 'Dara O\'Shea', 'DEF', 'West Bromwich Albion', 'https://cdn.sofifa.org/17/players/235405.png', 58, 0.17, 2, 34, 30, 57, 38, 30, 36, 37, 28, 37, 39, 55, 56, 40, 52, 59, 48, 65, 63, 48, 22, 48, 62, 27, 33, 45, 45, 52, 71, 68, 13, 8, 7, 7, 10),
+(459, 'Dara O''Shea', 'DEF', 'West Bromwich Albion', 'https://cdn.sofifa.org/17/players/235405.png', 58, 0.17, 2, 34, 30, 57, 38, 30, 36, 37, 28, 37, 39, 55, 56, 40, 52, 59, 48, 65, 63, 48, 22, 48, 62, 27, 33, 45, 45, 52, 71, 68, 13, 8, 7, 7, 10),
 (460, 'Robbie McCourt', 'DEF', 'West Bromwich Albion', 'https://cdn.sofifa.org/17/players/237677.png', 58, 0.23, 2, 44, 34, 55, 37, 29, 63, 39, 39, 32, 35, 66, 58, 54, 57, 74, 32, 61, 57, 40, 36, 55, 56, 47, 43, 49, 39, 62, 70, 68, 10, 6, 10, 6, 7),
 (461, 'Jasko Keranovic', 'GK', 'West Bromwich Albion', 'https://cdn.sofifa.org/17/players/235406.png', 50, 0.06, 1, 12, 5, 12, 15, 6, 5, 13, 11, 28, 14, 22, 32, 26, 37, 52, 22, 59, 21, 58, 9, 24, 12, 6, 26, 15, 27, 6, 14, 13, 45, 57, 59, 45, 51),
 (462, 'Tom Heaton', 'GK', 'Burnley', 'https://cdn.sofifa.org/17/players/163264.png', 79, 8.5, 1, 13, 12, 14, 28, 12, 14, 15, 13, 31, 22, 52, 50, 54, 71, 48, 14, 69, 36, 62, 12, 31, 17, 12, 44, 24, 56, 15, 15, 13, 79, 78, 74, 79, 80),
@@ -735,7 +763,7 @@ INSERT INTO `player` (`ID`, `name`, `position`, `club`, `photo`, `overall`, `val
 (551, 'Adam Federici', 'GK', 'Bournemouth', 'https://cdn.sofifa.org/17/players/164853.png', 73, 2.3, 1, 19, 18, 18, 28, 32, 19, 27, 21, 25, 27, 47, 49, 50, 72, 42, 17, 73, 41, 72, 14, 44, 22, 16, 63, 41, 61, 20, 11, 18, 73, 69, 78, 70, 73),
 (552, 'Callum Wilson', 'FWD', 'Bournemouth', 'https://cdn.sofifa.org/17/players/196978.png', 76, 7, 3, 52, 79, 62, 70, 65, 73, 62, 45, 60, 75, 93, 90, 81, 70, 79, 69, 66, 77, 81, 64, 73, 40, 77, 71, 75, 78, 20, 39, 25, 10, 15, 8, 10, 6),
 (553, 'Rhoys Wiggins', 'DEF', 'Bournemouth', 'https://cdn.sofifa.org/17/players/172966.png', 69, 0.775, 2, 63, 39, 53, 60, 43, 59, 44, 66, 48, 63, 64, 62, 67, 59, 80, 47, 72, 85, 72, 40, 52, 63, 52, 55, 39, 72, 72, 73, 77, 16, 15, 7, 7, 7),
-(554, 'Patrick O\'Flaherty', 'GK', 'Bournemouth', 'https://cdn.sofifa.org/17/players/226902.png', 54, 0.13, 1, 20, 13, 16, 23, 21, 12, 12, 13, 27, 21, 46, 40, 30, 48, 58, 23, 58, 26, 54, 16, 26, 26, 8, 11, 32, 24, 18, 15, 20, 60, 47, 50, 44, 63),
+(554, 'Patrick O''Flaherty', 'GK', 'Bournemouth', 'https://cdn.sofifa.org/17/players/226902.png', 54, 0.13, 1, 20, 13, 16, 23, 21, 12, 12, 13, 27, 21, 46, 40, 30, 48, 58, 23, 58, 26, 54, 16, 26, 26, 8, 11, 32, 24, 18, 15, 20, 60, 47, 50, 44, 63),
 (555, 'Aaron Ramsdale', 'GK', 'Bournemouth', 'https://cdn.sofifa.org/17/players/233934.png', 59, 0.27, 1, 15, 14, 25, 21, 23, 28, 16, 29, 19, 26, 33, 36, 45, 50, 52, 35, 58, 35, 51, 24, 35, 12, 5, 41, 28, 39, 12, 11, 19, 59, 57, 49, 54, 67),
 (556, 'Jordan Holmes', 'GK', 'Bournemouth', 'https://cdn.sofifa.org/17/players/231172.png', 54, 0.13, 1, 11, 8, 14, 52, 9, 12, 12, 11, 40, 40, 30, 26, 40, 50, 39, 17, 52, 41, 64, 5, 40, 9, 4, 32, 11, 40, 9, 22, 11, 51, 54, 56, 55, 52),
 (557, 'Ollie Harfield', 'DEF', 'Bournemouth', 'https://cdn.sofifa.org/17/players/234247.png', 59, 0.17, 2, 64, 35, 54, 42, 35, 52, 42, 43, 32, 46, 80, 85, 67, 52, 72, 33, 62, 78, 64, 37, 55, 53, 57, 36, 41, 38, 53, 56, 52, 11, 7, 12, 13, 7),
@@ -779,7 +807,7 @@ INSERT INTO `player` (`ID`, `name`, `position`, `club`, `photo`, `overall`, `val
 (595, 'Harry Maguire', 'DEF', 'Hull City', 'https://cdn.sofifa.org/17/players/203263.png', 74, 4.3, 2, 41, 30, 73, 67, 27, 60, 29, 46, 65, 59, 43, 54, 38, 56, 59, 54, 70, 72, 88, 34, 75, 70, 46, 50, 40, 61, 72, 77, 73, 14, 16, 9, 14, 9),
 (596, 'Andrea Ranocchia', 'DEF', 'Hull City', 'https://cdn.sofifa.org/17/players/182168.png', 75, 3.6, 2, 45, 22, 75, 65, 24, 58, 30, 34, 65, 67, 52, 54, 48, 60, 32, 59, 74, 66, 82, 31, 63, 79, 24, 59, 34, 68, 76, 80, 76, 12, 15, 11, 12, 15),
 (597, 'Lazar Marković', 'MID', 'Hull City', 'https://cdn.sofifa.org/17/players/212125.png', 76, 7, 4, 67, 65, 58, 71, 68, 84, 79, 62, 57, 82, 91, 92, 88, 73, 82, 65, 66, 60, 56, 60, 41, 49, 73, 73, 70, 78, 30, 39, 36, 8, 9, 15, 6, 7),
-(598, 'Alfred N\'Diaye', 'MID', 'Hull City', 'https://cdn.sofifa.org/17/players/188879.png', 78, 8.5, 2, 58, 46, 55, 76, 31, 65, 36, 32, 70, 74, 66, 77, 60, 74, 57, 73, 62, 81, 93, 63, 85, 80, 46, 61, 54, 65, 75, 83, 75, 11, 7, 13, 15, 10),
+(598, 'Alfred N''Diaye', 'MID', 'Hull City', 'https://cdn.sofifa.org/17/players/188879.png', 78, 8.5, 2, 58, 46, 55, 76, 31, 65, 36, 32, 70, 74, 66, 77, 60, 74, 57, 73, 62, 81, 93, 63, 85, 80, 46, 61, 54, 65, 75, 83, 75, 11, 7, 13, 15, 10),
 (599, 'Andrew Robertson', 'DEF', 'Hull City', 'https://cdn.sofifa.org/17/players/216267.png', 74, 4.3, 2, 78, 60, 67, 68, 32, 71, 70, 30, 59, 74, 79, 85, 83, 71, 72, 67, 55, 81, 68, 61, 69, 70, 64, 69, 55, 67, 71, 73, 69, 11, 8, 10, 7, 14),
 (600, 'Liam Edwards', 'DEF', 'Stoke City', 'https://cdn.sofifa.org/17/players/229779.png', 59, 0.29, 2, 34, 25, 56, 43, 35, 37, 33, 33, 35, 36, 55, 55, 41, 49, 58, 48, 68, 63, 55, 23, 54, 58, 25, 33, 41, 49, 61, 67, 66, 13, 12, 13, 10, 8),
 (601, 'Mark Waddington', 'MID', 'Stoke City', 'https://cdn.sofifa.org/17/players/221545.png', 54, 0.09, 2, 48, 43, 47, 70, 42, 51, 48, 42, 66, 52, 65, 67, 58, 49, 66, 56, 53, 34, 58, 42, 40, 29, 50, 51, 51, 57, 35, 47, 51, 11, 9, 14, 14, 8),
@@ -799,10 +827,10 @@ INSERT INTO `player` (`ID`, `name`, `position`, `club`, `photo`, `overall`, `val
 (615, 'Adama Valentin Diomande', 'FWD', 'Hull City', 'https://cdn.sofifa.org/17/players/188107.png', 71, 1.9, 2, 41, 71, 63, 53, 64, 70, 50, 35, 29, 69, 86, 78, 82, 69, 75, 72, 82, 70, 84, 66, 71, 33, 67, 44, 69, 68, 15, 17, 12, 12, 7, 10, 13, 14),
 (616, 'Jarrod Bowen', 'FWD', 'Hull City', 'https://cdn.sofifa.org/17/players/224371.png', 58, 0.24, 2, 42, 57, 62, 53, 45, 57, 43, 44, 41, 56, 65, 66, 68, 56, 70, 51, 60, 58, 61, 50, 42, 18, 53, 57, 61, 51, 21, 24, 24, 14, 8, 14, 10, 7),
 (617, 'Omar Elabdellaoui', 'DEF', 'Hull City', 'https://cdn.sofifa.org/17/players/190824.png', 74, 3.7, 3, 73, 42, 60, 73, 55, 75, 72, 60, 68, 74, 85, 82, 83, 71, 79, 72, 60, 80, 66, 66, 70, 69, 75, 69, 42, 66, 71, 72, 72, 8, 11, 12, 6, 6),
-(618, 'David Meyler', 'MID', 'Hull City', 'https://cdn.sofifa.org/17/players/187489.png', 71, 1.8, 2, 66, 63, 71, 73, 63, 70, 50, 54, 72, 73, 54, 55, 58, 73, 58, 70, 70, 81, 78, 60, 86, 65, 65, 66, 47, 75, 61, 68, 60, 13, 9, 14, 15, 12),
-(619, 'Will Keane', 'FWD', 'Hull City', 'https://cdn.sofifa.org/17/players/201911.png', 67, 0.975, 3, 40, 65, 62, 68, 62, 68, 48, 47, 51, 70, 75, 74, 73, 55, 63, 73, 64, 63, 62, 61, 55, 39, 64, 56, 67, 66, 32, 28, 20, 10, 11, 15, 11, 6),
-(620, 'Will Mannion', 'GK', 'Hull City', 'https://cdn.sofifa.org/17/players/231681.png', 51, 0.07, 1, 14, 15, 11, 18, 14, 15, 13, 11, 21, 20, 33, 38, 32, 52, 54, 22, 52, 18, 44, 11, 17, 14, 15, 21, 22, 30, 14, 13, 12, 52, 48, 45, 48, 51);
+(618, 'David Meyler', 'MID', 'Hull City', 'https://cdn.sofifa.org/17/players/187489.png', 71, 1.8, 2, 66, 63, 71, 73, 63, 70, 50, 54, 72, 73, 54, 55, 58, 73, 58, 70, 70, 81, 78, 60, 86, 65, 65, 66, 47, 75, 61, 68, 60, 13, 9, 14, 15, 12);
 INSERT INTO `player` (`ID`, `name`, `position`, `club`, `photo`, `overall`, `value`, `skills`, `crossing`, `finishing`, `heading`, `short_passing`, `volleys`, `dribbling`, `curve`, `free_kicks`, `long_passing`, `ball_controll`, `acceleration`, `sprint_speed`, `agility`, `reactions`, `balance`, `shot_power`, `jumping`, `stamina`, `strength`, `long_shots`, `aggression`, `interceptions`, `positioning`, `vision`, `penalties`, `composure`, `marking`, `stand_tackle`, `slide_tackle`, `GK_diving`, `GK_handling`, `GK_kicking`, `GK_positioning`, `GK_reflexes`) VALUES
+(619, 'Will Keane', 'FWD', 'Hull City', 'https://cdn.sofifa.org/17/players/201911.png', 67, 0.975, 3, 40, 65, 62, 68, 62, 68, 48, 47, 51, 70, 75, 74, 73, 55, 63, 73, 64, 63, 62, 61, 55, 39, 64, 56, 67, 66, 32, 28, 20, 10, 11, 15, 11, 6),
+(620, 'Will Mannion', 'GK', 'Hull City', 'https://cdn.sofifa.org/17/players/231681.png', 51, 0.07, 1, 14, 15, 11, 18, 14, 15, 13, 11, 21, 20, 33, 38, 32, 52, 54, 22, 52, 18, 44, 11, 17, 14, 15, 21, 22, 30, 14, 13, 12, 52, 48, 45, 48, 51),
 (621, 'Moses Odubajo', 'DEF', 'Hull City', 'https://cdn.sofifa.org/17/players/202113.png', 72, 2.5, 3, 61, 61, 63, 66, 31, 70, 47, 42, 62, 68, 83, 90, 83, 63, 77, 64, 81, 79, 75, 65, 70, 67, 60, 68, 51, 66, 70, 73, 70, 14, 10, 6, 13, 14),
 (622, 'Ryan Mason', 'MID', 'Hull City', 'https://cdn.sofifa.org/17/players/190683.png', 74, 3.5, 3, 70, 64, 55, 79, 64, 72, 70, 66, 75, 74, 69, 68, 74, 73, 77, 72, 48, 80, 61, 72, 79, 69, 74, 74, 69, 71, 70, 73, 69, 7, 10, 10, 16, 14),
 (623, 'Daniel Batty', 'MID', 'Hull City', 'https://cdn.sofifa.org/17/players/236043.png', 56, 0.17, 3, 50, 38, 60, 58, 50, 55, 45, 39, 54, 55, 63, 67, 51, 56, 68, 60, 63, 55, 54, 45, 65, 50, 63, 56, 50, 48, 55, 58, 56, 9, 12, 10, 7, 12),
@@ -850,8 +878,8 @@ INSERT INTO `player` (`ID`, `name`, `position`, `club`, `photo`, `overall`, `val
 -- Table structure for table `team`
 --
 
-CREATE TABLE `team` (
-  `ID` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `team` (
+`ID` int(11) unsigned NOT NULL,
   `ID_user` int(11) NOT NULL,
   `name` varchar(150) NOT NULL,
   `budget` float NOT NULL DEFAULT '350',
@@ -869,19 +897,21 @@ CREATE TABLE `team` (
   `points` int(3) NOT NULL DEFAULT '0',
   `goals_for` int(4) NOT NULL DEFAULT '0',
   `goals_against` int(4) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=28 ;
 
 --
 -- Dumping data for table `team`
 --
 
 INSERT INTO `team` (`ID`, `ID_user`, `name`, `budget`, `value`, `transfers`, `formation`, `is_playable`, `gks`, `defs`, `mids`, `fwds`, `wins`, `draws`, `losses`, `points`, `goals_for`, `goals_against`) VALUES
-(20, 49, 'Teem', 0.85, 349.15, 6, '4-4-2', 1, 2, 5, 5, 3, 6, 2, 7, 20, 26, 20),
-(21, 50, 'User team', 1.855, 348.145, 5, '4-3-3', 1, 2, 5, 5, 3, 5, 5, 6, 20, 21, 27),
+(20, 49, 'Teem', 0.85, 349.15, 12, '4-4-2', 1, 2, 5, 5, 3, 12, 10, 11, 46, 53, 40),
+(21, 50, 'User team', 1.855, 348.145, 9, '4-3-3', 1, 2, 5, 5, 3, 9, 8, 11, 35, 39, 48),
 (22, 51, 'Team :)', 1.55, 348.45, 3, '4-4-2', 1, 2, 5, 5, 3, 3, 1, 5, 10, 10, 19),
-(23, 52, 'Fantasee', 11, 339, 5, '3-5-2', 1, 2, 5, 5, 3, 5, 0, 3, 15, 16, 9),
-(24, 53, 'Winners', 1.06, 348.94, 1, '4-3-3', 1, 2, 5, 5, 3, 1, 3, 1, 6, 7, 7),
-(25, 54, 'Hunters', 1.485, 348.515, 3, '4-5-1', 1, 2, 5, 5, 3, 3, 1, 1, 10, 9, 7);
+(23, 52, 'Fantasee', 11, 339, 5, '3-5-2', 1, 2, 5, 5, 3, 5, 0, 4, 15, 17, 13),
+(24, 53, 'Winners', 1.06, 348.94, 3, '4-3-3', 1, 2, 5, 5, 3, 3, 8, 5, 17, 17, 23),
+(25, 54, 'Hunters', 1.485, 348.515, 11, '4-5-1', 1, 2, 5, 5, 3, 11, 5, 6, 38, 35, 29),
+(26, 55, 'Dornava Scorers', 56, 294, 8, '4-4-2', 1, 2, 5, 5, 3, 9, 7, 8, 34, 42, 34),
+(27, 56, 'Marko Mlakar 5000', 161.4, 188.6, 3, '4-4-2', 1, 2, 5, 5, 3, 3, 1, 5, 10, 14, 21);
 
 -- --------------------------------------------------------
 
@@ -889,12 +919,12 @@ INSERT INTO `team` (`ID`, `ID_user`, `name`, `budget`, `value`, `transfers`, `fo
 -- Table structure for table `team_player`
 --
 
-CREATE TABLE `team_player` (
-  `ID` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `team_player` (
+`ID` int(11) unsigned NOT NULL,
   `ID_team` int(11) NOT NULL,
   `ID_player` int(11) NOT NULL,
   `in_starting_XI` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=699 ;
 
 --
 -- Dumping data for table `team_player`
@@ -990,7 +1020,37 @@ INSERT INTO `team_player` (`ID`, `ID_team`, `ID_player`, `in_starting_XI`) VALUE
 (635, 25, 241, 1),
 (636, 25, 58, 1),
 (637, 25, 110, 0),
-(638, 25, 259, 0);
+(638, 25, 259, 0),
+(669, 26, 23, 1),
+(670, 26, 361, 0),
+(671, 26, 15, 0),
+(672, 26, 236, 1),
+(673, 26, 174, 1),
+(674, 26, 254, 1),
+(675, 26, 39, 1),
+(676, 26, 173, 1),
+(677, 26, 636, 1),
+(678, 26, 143, 1),
+(679, 26, 40, 1),
+(680, 26, 107, 0),
+(681, 26, 12, 0),
+(682, 26, 308, 1),
+(683, 26, 86, 1),
+(684, 27, 99, 1),
+(685, 27, 19, 0),
+(686, 27, 566, 1),
+(687, 27, 84, 1),
+(688, 27, 368, 1),
+(689, 27, 561, 1),
+(690, 27, 117, 0),
+(691, 27, 307, 0),
+(692, 27, 241, 1),
+(693, 27, 377, 1),
+(694, 27, 209, 1),
+(695, 27, 46, 1),
+(696, 27, 412, 0),
+(697, 27, 21, 1),
+(698, 27, 313, 1);
 
 -- --------------------------------------------------------
 
@@ -998,13 +1058,13 @@ INSERT INTO `team_player` (`ID`, `ID_team`, `ID_player`, `in_starting_XI`) VALUE
 -- Table structure for table `transfer`
 --
 
-CREATE TABLE `transfer` (
-  `ID` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `transfer` (
+`ID` int(11) unsigned NOT NULL,
   `ID_player` int(11) NOT NULL,
   `ID_user` int(11) NOT NULL,
   `in_out` enum('out','in') NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1012,13 +1072,13 @@ CREATE TABLE `transfer` (
 -- Table structure for table `user`
 --
 
-CREATE TABLE `user` (
-  `ID` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `user` (
+`ID` int(11) unsigned NOT NULL,
   `username` varchar(500) NOT NULL,
   `password` varchar(500) NOT NULL,
   `email` varchar(260) NOT NULL,
   `prestige` int(9) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=57 ;
 
 --
 -- Dumping data for table `user`
@@ -1030,7 +1090,9 @@ INSERT INTO `user` (`ID`, `username`, `password`, `email`, `prestige`) VALUES
 (51, 'test:)', '$2a$10$2GogL59W5sFPjrRCUMJXwOhY/XdiCYX2iSLsj7d/VTVSeKQUzzNIu', 'test@gmail.com', 0),
 (52, 'fanta', '$2a$10$ROX1tWc3t2DVcgPA1HGXU.FAlYK2sida1NukxJ6we1IdKfauGACT2', 'fantasy@gmail.com', 0),
 (53, 'win', '$2a$10$Bmh5JQPrIVrjQTF0ICgc3ONdNZ9PDyxeKaL9eQOcX1noe/fSPLUP.', 'coke@cola.com', 0),
-(54, 'mike_hunt', '$2a$10$4ZxWOGpyjmp3enTlKAvf3uugrDmqozIPQV75iwwKgZBZHAEyW8PC2', 'con@gmail.com', 0);
+(54, 'mike_hunt', '$2a$10$4ZxWOGpyjmp3enTlKAvf3uugrDmqozIPQV75iwwKgZBZHAEyW8PC2', 'con@gmail.com', 0),
+(55, 'Martin', '$2a$10$lhHHjoHOzh6avVdYA44FG.XMHAI0pCocBVnKGa9OZkzhuYsBMDbiO', 'martin@martin', 0),
+(56, 'Marko', '$2a$10$.wv.2q7Cmb6ixlUFxxy8de0Qv9qDQdoIRf8Iixzso3dHuFZ2pSb.2', 'marko@marko', 0);
 
 --
 -- Indexes for dumped tables
@@ -1040,55 +1102,55 @@ INSERT INTO `user` (`ID`, `username`, `password`, `email`, `prestige`) VALUES
 -- Indexes for table `fixture`
 --
 ALTER TABLE `fixture`
-  ADD PRIMARY KEY (`ID`);
+ ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `league`
 --
 ALTER TABLE `league`
-  ADD PRIMARY KEY (`ID`);
+ ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `league_fixture`
 --
 ALTER TABLE `league_fixture`
-  ADD PRIMARY KEY (`ID`);
+ ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `league_user`
 --
 ALTER TABLE `league_user`
-  ADD PRIMARY KEY (`ID`);
+ ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `player`
 --
 ALTER TABLE `player`
-  ADD PRIMARY KEY (`ID`);
+ ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `team`
 --
 ALTER TABLE `team`
-  ADD PRIMARY KEY (`ID`);
+ ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `team_player`
 --
 ALTER TABLE `team_player`
-  ADD PRIMARY KEY (`ID`);
+ ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `transfer`
 --
 ALTER TABLE `transfer`
-  ADD PRIMARY KEY (`ID`);
+ ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`ID`);
+ ADD PRIMARY KEY (`ID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -1098,47 +1160,47 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `fixture`
 --
 ALTER TABLE `fixture`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
+MODIFY `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=196;
 --
 -- AUTO_INCREMENT for table `league`
 --
 ALTER TABLE `league`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+MODIFY `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `league_fixture`
 --
 ALTER TABLE `league_fixture`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `league_user`
 --
 ALTER TABLE `league_user`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `player`
 --
 ALTER TABLE `player`
-  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=661;
+MODIFY `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=661;
 --
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+MODIFY `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `team_player`
 --
 ALTER TABLE `team_player`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=639;
+MODIFY `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=699;
 --
 -- AUTO_INCREMENT for table `transfer`
 --
 ALTER TABLE `transfer`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+MODIFY `ID` int(11) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+MODIFY `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=57;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
