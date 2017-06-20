@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar color=green>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Fixtures</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+		<ion-list>
+			<ion-item>
+				<ion-label>Sort by date:</ion-label>
+				<ion-datetime displayFormat="DD/MM/YYYY" min="2017" max="2017-12-31" [(ngModel)]="SearchDate"></ion-datetime>
+			</ion-item>
+			<ion-item>
+				<button ion-button color="green" (click)="getFixtures()">Search</button>
+			</ion-item>
+		</ion-list>
+
+	<ion-list *ngIf="Fixtures">
+		<ion-item>
+			<i>Click on a fixture to see the details</i>
+		</ion-item>
+		<ion-item *ngFor="let fixture of Fixtures">
+			<fixture [_Fixture]="fixture"></fixture>
+		</ion-item>
+	</ion-list>
+	<div *ngIf="!Fixtures">
+		No fixtures for provided date. Choose another date.
+	</div>
+</ion-content>

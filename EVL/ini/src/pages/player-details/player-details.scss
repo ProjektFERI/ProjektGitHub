@@ -1,0 +1,26 @@
+page-player-details {
+	.class-padd-modal
+	{
+		/*border: black 2px solid;
+		border-radius: 5px;*/
+		padding: 5px;
+		border-radius: 10px;
+		background-color: #f3f1f1;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.02), 0 6px 20px 0 rgba(0, 0, 0, 0.02);
+		margin-bottom: 25px; 
+	}
+
+	.attribute
+	{
+		display: inline;
+		color: white;
+		padding: 3px;
+		border-radius: 5px;
+		/*background-color: green;*/
+	}
+
+	.outer-div
+	{
+		margin-bottom:10px;
+	}
+}

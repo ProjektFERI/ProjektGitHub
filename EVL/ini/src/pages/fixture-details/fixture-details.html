@@ -1,0 +1,38 @@
+<ion-header>
+	<ion-navbar color="green">
+		<ion-title *ngIf="Team1 && Team2 && _Fixture">{{Team1.name}} {{_Fixture.goals_team1}} - {{_Fixture.goals_team2}} {{Team2.name}}</ion-title>
+		<ion-buttons end>
+			<button ion-button (click)="closeModal()">Close</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+	<ion-row>
+		<ion-col col-3 *ngIf="Team1">
+			<div style="text-align:center; font-size:18px;">
+				{{Team1.name}}<br>
+				<!--
+				<button ion-button small color="green" (click)="openModalTeam(Team1)">Details</button>
+				-->
+			</div>
+		</ion-col>
+		<ion-col col-3 *ngIf="_Fixture">
+			<div style="text-align:center; font-size:18px;">
+				{{_Fixture.goals_team1}} - {{_Fixture.goals_team2}}
+			</div>
+		</ion-col>
+		<ion-col col-3 *ngIf="Team2">
+			<div style="text-align:center; font-size:18px;">
+				{{Team2.name}}<br>
+				<!--
+				<button ion-button small color="green" (click)="openModalTeam(Team2)">Details</button>
+				-->
+			</div>
+		</ion-col>
+	</ion-row>
+	<ion-row *ngIf="_Fixture" style="margin-top:20px;">
+		This fixture was played on {{_Fixture.date | date:'shortDate'}}
+	</ion-row>
+</ion-content>
