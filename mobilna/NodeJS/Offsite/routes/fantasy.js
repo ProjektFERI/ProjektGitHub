@@ -525,4 +525,21 @@ router.post('/ionic/playersOfTeam', function(request, response)
 	});
 });
 
+router.post('/ionic/fixtures', function(request, response)
+{
+	console.log("--IONIC FIXTURES--");
+	var date = request.body.date;
+	var queryString;
+
+	if(date == null)
+		queryString = "SELECT * FROM fixture WHERE DATE(date) = DATE(NOW()) ORDER BY date DESC";
+	else
+		queryString = "SELECT * FROM fixture WHERE DATE(date) = DATE('" + date + "') ORDER BY date DESC";
+
+	databaseConnection.query(queryString, function(error, result)
+	{
+		response.json(result);
+	});
+});
+
 module.exports = router;

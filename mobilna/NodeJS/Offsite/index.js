@@ -3,7 +3,7 @@ var bodyParser      = require('body-parser');                   //parser podatko
 var cookieParser    = require('cookie-parser');                 //za razpoznavanje cookies
 var session         = require('express-session');               //za delo s sejo
 
-//var cors         = require('cors'); 
+//var cors         = require('cors');
 
 
 var app  = express();                                           //instanca aplikacije z express
@@ -27,15 +27,23 @@ app.use(function(request, response, next)
 	next();
 });
 
-//app.use(cors());
+/*
+//CORSE?
+app.use(cors());
 
+app.get(function (req, res, next) {
+  //res.json({msg: 'This is CORS-enabled for all origins!'})
+	console.log("Cors?");
+})
+*/
 
 //dovolimo zahteve iz drugih domen
 app.all('/*', function(request, response, next)
 {
-	//response.header("Access-Control-Allow-Origin", "*");
+		//response.header("Access-Control-Allow-Origin", "*");
     response.header("Access-Control-Allow-Origin", "http://localhost:8100");
     response.header("Access-Control-Allow-Credentials", "true");
+		//response.header("Access-Control-Allow-Credentials", "false");
 
     response.header("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
     next();

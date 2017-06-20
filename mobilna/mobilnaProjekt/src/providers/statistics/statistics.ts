@@ -10,6 +10,14 @@ import { Player }					from '../../_models/player';
 export class StatisticsProvider
 {
 
+	//URL
+  //serviceURL : string = "http://192.168.0.104:8080";
+  //serviceURL : string = "http://localhost:8080";
+  //serviceURL : string = "http://164.8.161.163:8080";
+  //serviceURL : string = "http://192.168.1.105:8080";
+  serviceURL : string = "http://164.8.161.124:8080";
+  //URL
+
 	constructor(public http: Http)
 	{
 		console.log('Hello StatisticsProvider Provider');
@@ -18,7 +26,7 @@ export class StatisticsProvider
 
 	getMostValuableTeam() : Observable<Team>
     {
-        return this.http.get('http://localhost:8080/statistics/mostValuableTeam', { headers : this.getHeaders(), withCredentials : true })
+        return this.http.get( this.serviceURL + '/statistics/mostValuableTeam', { headers : this.getHeaders(), withCredentials : true })
                         .map((response : Response) =>
                         {
                             var res = response.json();
@@ -30,7 +38,7 @@ export class StatisticsProvider
 
     getMostPickedPlayer() : Observable<Player>
     {
-        return this.http.get('http://localhost:8080/statistics/mostPickedPlayer', { headers : this.getHeaders(), withCredentials : true })
+        return this.http.get( this.serviceURL + '/statistics/mostPickedPlayer', { headers : this.getHeaders(), withCredentials : true })
                         .map((response : Response) =>
                         {
                             var res = response.json();
@@ -41,7 +49,7 @@ export class StatisticsProvider
 
     getMostUsedFormation() : Observable<string>
     {
-        return this.http.get('http://localhost:8080/statistics/mostUsedFormation', { headers : this.getHeaders(), withCredentials : true })
+        return this.http.get( this.serviceURL + '/statistics/mostUsedFormation', { headers : this.getHeaders(), withCredentials : true })
                         .map((response : Response) =>
                         {
                             var res = response.json();
@@ -52,7 +60,7 @@ export class StatisticsProvider
 
     getTeamWithMostWins() : Observable<Team>
     {
-        return this.http.get('http://localhost:8080/statistics/mostWins', { headers : this.getHeaders(), withCredentials : true })
+        return this.http.get( this.serviceURL + '/statistics/mostWins', { headers : this.getHeaders(), withCredentials : true })
                         .map((response : Response) =>
                         {
                             var res = response.json();
@@ -63,7 +71,7 @@ export class StatisticsProvider
 
     getTeamWithMostDraws() : Observable<Team>
     {
-        return this.http.get('http://localhost:8080/statistics/mostDraws', { headers : this.getHeaders(), withCredentials : true })
+        return this.http.get( this.serviceURL + '/statistics/mostDraws', { headers : this.getHeaders(), withCredentials : true })
                         .map((response : Response) =>
                         {
                             var res = response.json();
@@ -74,7 +82,7 @@ export class StatisticsProvider
 
     getTeamWithMostLosses() : Observable<Team>
     {
-        return this.http.get('http://localhost:8080/statistics/mostLosses', { headers : this.getHeaders(), withCredentials : true })
+        return this.http.get( this.serviceURL + '/statistics/mostLosses', { headers : this.getHeaders(), withCredentials : true })
                         .map((response : Response) =>
                         {
                             var res = response.json();
@@ -85,7 +93,7 @@ export class StatisticsProvider
 
     getMostGoalsScored() : Observable<Team>
     {
-        return this.http.get('http://localhost:8080/statistics/mostGoalsScored', { headers : this.getHeaders(), withCredentials : true })
+        return this.http.get( this.serviceURL + '/statistics/mostGoalsScored', { headers : this.getHeaders(), withCredentials : true })
                         .map((response : Response) =>
                         {
                             var res = response.json();
@@ -96,7 +104,7 @@ export class StatisticsProvider
 
     getMostGoalsConceded() : Observable<Team>
     {
-        return this.http.get('http://localhost:8080/statistics/mostGoalsConceded', { headers : this.getHeaders(), withCredentials : true })
+        return this.http.get( this.serviceURL + '/statistics/mostGoalsConceded', { headers : this.getHeaders(), withCredentials : true })
                         .map((response : Response) =>
                         {
                             var res = response.json();
@@ -107,7 +115,7 @@ export class StatisticsProvider
 
     getLeastGoalsScored() : Observable<Team>
     {
-        return this.http.get('http://localhost:8080/statistics/leastGoalsScored', { headers : this.getHeaders(), withCredentials : true })
+        return this.http.get( this.serviceURL + '/statistics/leastGoalsScored', { headers : this.getHeaders(), withCredentials : true })
                         .map((response : Response) =>
                         {
                             var res = response.json();
@@ -118,7 +126,7 @@ export class StatisticsProvider
 
     getLeastGoalsConceded() : Observable<Team>
     {
-        return this.http.get('http://localhost:8080/statistics/leastGoalsConceded', { headers : this.getHeaders(), withCredentials : true })
+        return this.http.get( this.serviceURL + '/statistics/leastGoalsConceded', { headers : this.getHeaders(), withCredentials : true })
                         .map((response : Response) =>
                         {
                             var res = response.json();

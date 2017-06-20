@@ -14,6 +14,12 @@ import { PlayerDetailsPage }		from '../player-details/player-details';
 
 import { AlertController } from 'ionic-angular';
 
+import { TextToSpeech } from '@ionic-native/text-to-speech';
+
+import { LocalNotifications } from '@ionic-native/local-notifications';
+
+//import { Vibration } from '@ionic-native/vibration';
+
 
 /**
  * Generated class for the ShowteamPage page.
@@ -35,7 +41,7 @@ export class ShowteamPage {
   logedinPlayers : Player[];
   FixtureResult : any;
 
-  constructor(private globalProvider: GlobalProvider, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+  constructor(private tts: TextToSpeech, private localNotifications: LocalNotifications, private globalProvider: GlobalProvider, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
 
     if(navParams.get("selectedTeam"))
     {
@@ -108,6 +114,8 @@ export class ShowteamPage {
                     }else{
                         this.CanPlay = false;
                         console.log("match<5 nope: " + this.CanPlay);
+                        //notification!!!
+                        this.openNotification(1, "Offsite: Can't play:", "You have already played 5 games today. You have to wait till tomorrow to play a game.");
                     }
                     if(this.globalProvider.userTeam.ID == this.userTeam.ID){
                         this.CanPlay = false;
@@ -177,6 +185,47 @@ export class ShowteamPage {
       buttons: ['OK']
     });
     alert.present();
+  }
+
+  readSite()
+  {
+
+    let mainText : string = "Team: " + this.userTeam.name + "\n Value: " + this.userTeam.value + "\n Wins: " + this.userTeam.wins + "\n Draws: " + this.userTeam.draws + "\n Losses: " + this.userTeam.losses;
+    mainText += "\n Points: " + this.userTeam.points + "\n Goals scored: " + this.userTeam.goals_for + "\n Goals recieved: " + this.userTeam.goals_against;
+
+    this.tts.speak(mainText)
+      .then(() => console.log('TTS Success'))
+      .catch((reason: any) => console.log(reason));
+
+
+  }
+
+  openNotification(id, title, text)
+  {
+    /*
+    var checkBool : Boolean = false;
+
+    this.localNotifications.isPresent(id).then(function (present) {
+      if (present) {
+        checkBool = true;
+        this.showAlert("checkBool:", true);
+      } else {
+        this.showAlert("checkBool:", false);
+      }
+    });
+    //this.showAlert("checkBool:", checkBool);
+    */
+
+    if(true)
+    {
+      console.log("Notification:");
+      this.localNotifications.schedule({
+        id: id,
+        title: title,
+        text: text,
+      });
+    }
+    
   }
 
 

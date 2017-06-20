@@ -11,6 +11,7 @@ import { Team }     from '../../_models/team';
 import { Player }     from '../../_models/player';
 import { User }     from '../../_models/user';
 import { APIresponse }     from '../../_models/APIresponse';
+import { Fixture }     from '../../_models/fixture';
 
 
 
@@ -19,6 +20,14 @@ import { APIresponse }     from '../../_models/APIresponse';
 
 @Injectable()
 export class GlobalProvider {
+
+  //URL
+  //serviceURL : string = "http://192.168.0.104:8080";
+  //serviceURL : string = "http://localhost:8080";
+  //serviceURL : string = "http://164.8.161.163:8080";
+  //serviceURL : string = "http://192.168.1.105:8080";
+  serviceURL : string = "http://164.8.161.124:8080";
+  //URL
 
   isLoggedIn : boolean = false;
   userTeam : Team;
@@ -41,7 +50,7 @@ export class GlobalProvider {
 
   login(user : User) : Observable<APIresponse>
   {
-          return this.http.post('http://localhost:8080/user/login', user, { headers: this.getHeaders(), withCredentials: true })
+          return this.http.post( this.serviceURL + '/user/login', user, { headers: this.getHeaders(), withCredentials: true })
                       .map((response : Response) =>
                       {
                           var res = response.json();                              //server poslje response
@@ -57,7 +66,7 @@ export class GlobalProvider {
 
   fetchTeams(requestInfo : any) : Observable<Team[]>
   {
-            return this.http.post('http://localhost:8080/fantasy/teams', requestInfo, { headers : this.getHeaders(), withCredentials : true})
+            return this.http.post( this.serviceURL + '/fantasy/teams', requestInfo, { headers : this.getHeaders(), withCredentials : true})
                             .map((response : Response) =>
                             {
                                 var res = response.json();
@@ -71,7 +80,7 @@ export class GlobalProvider {
 
     fetchPlayers(requestInfo : Team) : Observable<Player[]> //starting
     {
-      return this.http.post('http://localhost:8080/showteam/starting', requestInfo, { headers : this.getHeaders(), withCredentials : true})
+      return this.http.post( this.serviceURL + '/showteam/starting', requestInfo, { headers : this.getHeaders(), withCredentials : true})
                       .map((response : Response) =>
                       {
                           var res = response.json();
@@ -85,7 +94,7 @@ export class GlobalProvider {
 
     countTodayMatches(teamID : number) : Observable<any>
   {
-      return this.http.post('http://localhost:8080/showteam/matchCount', { TeamID : teamID }, { headers : this.getHeaders(), withCredentials : true})
+      return this.http.post( this.serviceURL + '/showteam/matchCount', { TeamID : teamID }, { headers : this.getHeaders(), withCredentials : true})
                         .map((response : Response) =>
                         {
                             var res = response.json();
@@ -97,7 +106,7 @@ export class GlobalProvider {
   simulate(requestInfo) : Observable<any>
   {
       console.log("TEST");
-      return this.http.post('http://localhost:8080/fantasy/simulateFixture', requestInfo, { headers : this.getHeaders(), withCredentials : true})
+      return this.http.post( this.serviceURL + '/fantasy/simulateFixture', requestInfo, { headers : this.getHeaders(), withCredentials : true})
                       .map((response : Response) =>
                       {
                           var res = response.json();
@@ -106,6 +115,28 @@ export class GlobalProvider {
                       })
 
   }
+
+  getFixtures(pDate) : Observable<Fixture[]>
+  {
+		return this.http.post( this.serviceURL + '/fantasy/ionic/fixtures', { date : pDate }, { headers: this.getHeaders(), withCredentials: true })
+			.map((response: Response) =>
+			{
+				var res = response.json();
+				if(res == null || res.length == 0)
+					return null;
+				return res;
+			})
+  }
+
+  getTeams(requestInfo) : Observable<Team[]>
+    {
+        return this.http.post( this.serviceURL + '/fantasy/fixtureTeams', requestInfo, { headers : this.getHeaders(), withCredentials : true})
+			.map((response: Response) =>
+			{
+				var res = response.json();
+				return res;
+			})
+    }
 
 
 

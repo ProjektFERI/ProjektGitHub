@@ -22,6 +22,8 @@ import {GlobalProvider} from '../../providers/global/global';
 
 import { StatisticsPage } from '../statistics/statistics';
 
+import { FixturesPage } from '../fixtures/fixtures';
+
 
 
 
@@ -46,6 +48,7 @@ export class MenuPage {
       { title: 'My Team', component: ShowteamPage },
       { title: 'League', component: LeaguePage },
       { title: 'Statistics', component: StatisticsPage },
+      { title: 'Fixtures', component: FixturesPage },
       { title: 'Invite', component: InvitePage }
       //+logout
     ];

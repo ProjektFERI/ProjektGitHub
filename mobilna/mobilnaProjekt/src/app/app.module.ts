@@ -9,6 +9,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { SMS } from '@ionic-native/sms';
+//import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts';
+import { Contacts, Contact } from '@ionic-native/contacts';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+import { TextToSpeech } from '@ionic-native/text-to-speech';
+import { Vibration } from '@ionic-native/vibration';
 
 //pages
 import { MyApp } from './app.component';
@@ -32,6 +37,10 @@ import { PlayerDetailsPage } from '../pages/player-details/player-details';
 import { StatisticsProvider } from '../providers/statistics/statistics';
 import { TeamDetailsProvider } from '../providers/team-details/team-details';
 
+import { FixturesPage } from '../pages/fixtures/fixtures';
+import { FixtureDetailsPage } from '../pages/fixture-details/fixture-details';
+import { FixtureComponent } from '../components/fixture/fixture';
+
 
 
 @NgModule({
@@ -45,7 +54,10 @@ import { TeamDetailsProvider } from '../providers/team-details/team-details';
     MenuPage,
     ShowteamPage,
     InvitePage,
-    StatisticsPage, TeamDetailsPage, PlayerDetailsPage
+    StatisticsPage, TeamDetailsPage, PlayerDetailsPage,
+    FixturesPage, FixtureDetailsPage,
+    // : samo declaration vvv
+    FixtureComponent
   ],
   imports: [ //add modules?
     BrowserModule,
@@ -65,7 +77,8 @@ import { TeamDetailsProvider } from '../providers/team-details/team-details';
     MenuPage,
     ShowteamPage,
     InvitePage,
-    StatisticsPage, TeamDetailsPage, PlayerDetailsPage
+    StatisticsPage, TeamDetailsPage, PlayerDetailsPage,
+    FixturesPage, FixtureDetailsPage
   ],
   providers: [ //add services?
     StatusBar,
@@ -74,6 +87,14 @@ import { TeamDetailsProvider } from '../providers/team-details/team-details';
     //add
     GlobalProvider,
     SMS,
+    //CONTACTS?
+    //Contacts, Contact, ContactField, ContactName, //contacts
+    Contacts,
+    Contact,
+    //CONTACTS?
+    LocalNotifications,
+    TextToSpeech,
+    Vibration,
     StatisticsProvider, TeamDetailsProvider
   ]
 })

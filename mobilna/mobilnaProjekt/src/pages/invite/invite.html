@@ -19,11 +19,15 @@
   <ion-list>
 
     <ion-item>
-      <ion-input type="number" value="" placeholder="Phonen Number" [(ngModel)]="phoneNumber"></ion-input>
+      <ion-input type="text" value="" placeholder="Phonen Number" [(ngModel)]="phoneNumber"></ion-input>
     </ion-item>
 
     <ion-item>
       <button ion-button color="green" block (click)="sendInvite()" style="height: 80px;">Send Invite</button>
+    </ion-item>
+
+    <ion-item>
+      <button ion-button color="green" block (click)="searchContacts()" style="height: 40px;">Search Contacts</button>
     </ion-item>
 
   </ion-list>
